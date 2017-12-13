@@ -32,10 +32,10 @@
       <UniqueIdentifier>{802e439a-6b63-421f-9bce-337a839a36c4}</UniqueIdentifier>
     </Filter>
     <Filter Include="LevelOfDetails">
-      <UniqueIdentifier>{479ec4b2-cc19-4e29-b0de-61a018bc289f}</UniqueIdentifier>
+      <UniqueIdentifier>{2765d7f8-1dce-4fbd-9b6a-073ad5188fa8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Enemy">
-      <UniqueIdentifier>{d67df42f-cbb5-4e86-80ec-b647642c6c5c}</UniqueIdentifier>
+      <UniqueIdentifier>{cbc84f3c-d549-4814-9c2b-8a0cca9e982f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include "Grid.h"
 #include "EntityBase.h"
 #include "../FPSCamera.h"
+
 class CSpatialPartition
 {
 protected:
@@ -101,7 +102,6 @@ public:
 
 	// Set LOD distances
 	void SetLevelOfDetails(const float distance_High2Mid, const float distance_Mid2Low);
-
 	// Check if a CGrid is visible to the camera
 	bool IsVisible(Vector3 theCameraPosition, Vector3 theCameraDirection, const int xIndex, const int zIndex);
 };

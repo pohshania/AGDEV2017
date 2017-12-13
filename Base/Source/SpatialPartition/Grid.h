@@ -10,7 +10,6 @@ using namespace std;
 
 #include "../LevelOfDetails/LevelOfDetails.h"
 
-
 class Mesh;
 
 class CGrid
@@ -71,6 +70,6 @@ public:
 	// PrintSelf
 	void PrintSelf();
 
-	// Set the level of Detail for objevts in this Grid
+	// Set the Level of Detail for objects in this CGrid
 	void SetDetailLevel(const CLevelOfDetails::DETAIL_LEVEL theDetailLevel);
 };

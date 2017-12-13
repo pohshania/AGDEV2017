@@ -16,6 +16,7 @@ CEnemy::CEnemy()
 {
 }
 
+
 CEnemy::~CEnemy()
 {
 }
@@ -26,25 +27,32 @@ void CEnemy::Init(void)
 	defaultPosition.Set(0, 0, 10);
 	defaultTarget.Set(0, 0, 0);
 	defaultUp.Set(0, 1, 0);
+
 	// Set the current values
 	position.Set(10.0f, 0.0f, 0.0f);
 	target.Set(10.0f, 0.0f, 450.0f);
 	up.Set(0.0f, 1.0f, 0.0f);
+
 	// Set Boundary
 	maxBoundary.Set(1, 1, 1);
 	minBoundary.Set(-1, -1, -1);
+
 	// Set speed
 	m_dSpeed = 1.0;
+
 	// Initialise the LOD meshes
-	InitLOD("sphere", "sphere", "cubeSG");
+	InitLOD("cube", "sphere", "cubeSG");
+
 	// Initialise the Collider
 	this->SetCollider(true);
 	this->SetAABB(Vector3(1, 1, 1), Vector3(-1, -1, -1));
+
 	// Add to EntityManager
 	EntityManager::GetInstance()->AddEntity(this, true);
+
 }
 
-// Reset this enemy instance to default
+// Reset this player instance to default
 void CEnemy::Reset(void)
 {
 	// Set the current values to default values
@@ -64,20 +72,17 @@ void CEnemy::SetTarget(const Vector3& target)
 {
 	this->target = target;
 }
-
 // Set Up
 void CEnemy::SetUp(const Vector3& up)
 {
 	this->up = up;
 }
-
-// Set the boundary for the enemy info
+// Set the boundary for the player info
 void CEnemy::SetBoundary(Vector3 max, Vector3 min)
 {
 	maxBoundary = max;
 	minBoundary = min;
 }
-
 // Set the terrain for the player info
 void CEnemy::SetTerrain(GroundEntity* m_pTerrain)
 {
@@ -100,13 +105,11 @@ Vector3 CEnemy::GetTarget(void) const
 {
 	return target;
 }
-
 // Get Up
 Vector3 CEnemy::GetUp(void) const
 {
 	return up;
 }
-
 // Get the terrain for the player info
 GroundEntity* CEnemy::GetTerrain(void)
 {
@@ -166,4 +169,3 @@ void CEnemy::Render(void)
 	}
 	modelStack.PopMatrix();
 }
-

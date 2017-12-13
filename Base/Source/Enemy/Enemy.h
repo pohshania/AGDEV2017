@@ -4,7 +4,8 @@
 
 class Mesh;
 
-class CEnemy : public GenericEntity
+class CEnemy :
+	public GenericEntity
 {
 protected:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
@@ -45,8 +46,10 @@ public:
 
 	// Update
 	void Update(double dt = 0.0333f);
+
 	// Constrain the position within the borders
 	void Constrain(void);
 	// Render
 	void Render(void);
 };
+#pragma once

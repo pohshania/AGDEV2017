@@ -188,35 +188,8 @@ vector<EntityBase*> CGrid::GetListOfObject(void)
 }
 
 /********************************************************************************
-Set the Level of Detail for objects in this CGrid
+PrintSelf
 ********************************************************************************/
-void CGrid::SetDetailLevel(const CLevelOfDetails::DETAIL_LEVEL theDetailLevel)
-{
-	this->theDetailLevel = theDetailLevel;
-
-	//if ((ListOfObjects.size() > 0) && (theDetailLevel == 0))
-	//{
-	//	// Put a break-point here to trace and see that the entities in this CGrid are set to NO_DETAILS
-	//	int a = 0;
-	//}
-
-	// Check each object to see if they are no longer in this grid
-	std::vector<EntityBase*>::iterator it;
-	it = ListOfObjects.begin();
-	while (it != ListOfObjects.end())
-	{
-		GenericEntity* theEntity = (GenericEntity*)(*it);
-		if (theEntity->GetLODStatus() == true)
-		{
-			theEntity->SetDetailLevel(theDetailLevel);
-		}
-		++it;
-	}
-}
-
-/********************************************************************************
- PrintSelf
- ********************************************************************************/
 void CGrid::PrintSelf()
 {
 	cout << "CGrid::PrintSelf()" << endl;
@@ -234,4 +207,30 @@ void CGrid::PrintSelf()
 	if (ListOfObjects.size()>0)
 		cout << "\t------------------------------------------------------------------------" << endl;
 	cout << "********************************************************************************" << endl;
+}
+
+/********************************************************************************
+Set the Level of Detail for objects in this CGrid
+********************************************************************************/
+void CGrid::SetDetailLevel(const CLevelOfDetails::DETAIL_LEVEL theDetailLevel)
+{
+	this->theDetailLevel = theDetailLevel;
+
+	if ((ListOfObjects.size() > 0) && (theDetailLevel == 0))
+	{
+		// Put a break-point here to trace and see that the entities in this CGrid are set to NO_DETAILS
+		int a = 0;
+	}
+	// Check each object to see if they are no longer in this grid
+	std::vector<EntityBase*>::iterator it;
+	it = ListOfObjects.begin();
+	while (it != ListOfObjects.end())
+	{
+		GenericEntity* theEntity = (GenericEntity*)(*it);
+		if (theEntity->GetLODStatus() == true)
+		{
+			theEntity->SetDetailLevel(theDetailLevel);
+		}
+		++it;
+	}
 }

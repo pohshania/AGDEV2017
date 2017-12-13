@@ -1,7 +1,6 @@
 #pragma once
 #include "Vector3.h"
 #include "Mesh.h"
-#include "MeshBuilder.h"
 
 class CLevelOfDetails
 {
@@ -23,13 +22,11 @@ public:
 	virtual ~CLevelOfDetails();
 
 	bool InitLOD(const std::string& _meshName_High,
-				 const std::string& _meshName_Mid,
-				 const std::string& _meshName_Low);
-
+		const std::string& _meshName_Mid,
+		const std::string& _meshName_Low);
 	bool DestroyLOD(void);
 
 	void SetLODStatus(const bool bActive);
-
 	bool GetLODStatus(void) const;
 
 	bool SetLODMesh(Mesh* theMesh, const DETAIL_LEVEL theDetailLevel);

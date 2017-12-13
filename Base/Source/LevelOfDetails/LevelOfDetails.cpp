@@ -1,4 +1,5 @@
 #include "LevelOfDetails.h"
+#include "MeshBuilder.h"
 
 /********************************************************************************
 Constructor
@@ -11,6 +12,7 @@ CLevelOfDetails::CLevelOfDetails()
 	, theDetailLevel(HIGH_DETAILS)
 {
 }
+
 /********************************************************************************
 Destructor
 ********************************************************************************/
@@ -32,11 +34,13 @@ bool CLevelOfDetails::InitLOD(const std::string& _meshName_High,
 	modelMesh_HighDetails = MeshBuilder::GetInstance()->GetMesh(_meshName_High);
 	modelMesh_MidDetails = MeshBuilder::GetInstance()->GetMesh(_meshName_Mid);
 	modelMesh_LowDetails = MeshBuilder::GetInstance()->GetMesh(_meshName_Low);
+
 	// If any of the mesh is not loaded, then return false and avoid setting the LOD to active
 	if ((modelMesh_HighDetails == nullptr) ||
 		(modelMesh_MidDetails == nullptr) ||
 		(modelMesh_LowDetails == nullptr))
 		return false;
+
 	// Set the LOD to active
 	SetLODStatus(true);
 	return true;
@@ -63,7 +67,8 @@ bool CLevelOfDetails::DestroyLOD(void)
 		modelMesh_LowDetails = NULL;
 	}
 	return false;
-}
+}
+
 /********************************************************************************
 Set the status of the LOD
 ********************************************************************************/
@@ -71,6 +76,7 @@ void CLevelOfDetails::SetLODStatus(const bool bActive)
 {
 	m_bActive = bActive;
 }
+
 /********************************************************************************
 Get the LOD Status
 ********************************************************************************/
@@ -92,6 +98,7 @@ bool CLevelOfDetails::SetLODMesh(Mesh* theMesh, const DETAIL_LEVEL theDetailLeve
 		modelMesh_LowDetails = theMesh;
 	else
 		return false;
+
 	return true;
 }
 
@@ -122,7 +129,6 @@ Mesh* CLevelOfDetails::GetLODMesh(const DETAIL_LEVEL theDetailLevel) const
 		return modelMesh_LowDetails;
 	return NULL;
 }
-
 /********************************************************************************
 Get the current detail level
 ********************************************************************************/
@@ -142,4 +148,3 @@ bool CLevelOfDetails::SetDetailLevel(const DETAIL_LEVEL theDetailLevel)
 	}
 	return false;
 }
-
