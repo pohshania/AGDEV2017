@@ -165,6 +165,15 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateRay("laser", 10.0f);
 	MeshBuilder::GetInstance()->GenerateQuad("GRIDMESH", Color(1, 1, 1), 10.f);
 
+	// Enemy
+	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBase", "OBJ//Enemy//EnemyBase.obj");
+	MeshBuilder::GetInstance()->GetMesh("EnemyBase")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBasePart1", "OBJ//Enemy//EnemyBasePart1.obj");
+	MeshBuilder::GetInstance()->GetMesh("EnemyBasePart1")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBasePart2", "OBJ//Enemy//EnemyBasePart2.obj");
+	MeshBuilder::GetInstance()->GetMesh("EnemyBasePart2")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
+
+
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
 	CSpatialPartition::GetInstance()->SetMesh("GRIDMESH");
@@ -220,9 +229,33 @@ void SceneText::Init()
 	aRotateMtx->SetSteps(-120, 60);
 	grandchildNode->SetUpdateTransformation(aRotateMtx);
 
-	// Create a CEnemy instance
+	// Creating enemy instances
 	theEnemy = new CEnemy();
 	theEnemy->Init();
+
+	GenericEntity* EnemyBase = Create::Asset("EnemyBase", Vector3(0.0f, 70.0f, -300.0f));
+	EnemyBase->SetScale(Vector3(3, 3, 3));
+	EnemyBase->SetCollider(true);
+	EnemyBase->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	EnemyBase->InitLOD("EnemyBase", "EnemyBase", "cubeSG");
+	CSceneNode* EnemyBaseNode = CSceneGraph::GetInstance()->AddNode(EnemyBase) ;
+
+	GenericEntity* EnemyBasePart1 = Create::Asset("EnemyBasePart1", Vector3(0.0f, 70.0f, -300.0f));
+	EnemyBasePart1->SetScale(Vector3(3, 3, 3));
+	EnemyBasePart1->SetCollider(true);
+	EnemyBasePart1->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	EnemyBasePart1->InitLOD("EnemyBasePart1", "EnemyBasePart1", "cubeSG");
+	CSceneNode* EnemyBasePart1Node = EnemyBaseNode->AddChild(EnemyBasePart1);
+
+
+	GenericEntity* EnemyBasePart2 = Create::Asset("EnemyBasePart2", Vector3(0.0f, 70.0f, -300.0f));
+	EnemyBasePart2->SetScale(Vector3(3, 3, 3));
+	EnemyBasePart2->SetCollider(true);
+	EnemyBasePart2->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	EnemyBasePart2->InitLOD("EnemyBasePart2", "EnemyBasePart2", "cubeSG");
+	CSceneNode* EnemyBasePart2Node = EnemyBaseNode->AddChild(EnemyBasePart2);
+
+
 
 	// Create ground
 	groundEntity = Create::Ground("GRASS_DARKGREEN", "GEO_GRASS_LIGHTGREEN");
