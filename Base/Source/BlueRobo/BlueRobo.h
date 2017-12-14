@@ -4,6 +4,9 @@
 #include "../PlayerInfo/PlayerInfo.h"
 #include "../SceneGraph/SceneGraph.h"
 #include "../SceneGraph/SceneNode.h"
+#include "BlueRoboHead.h"
+#include "BlueRoboLeftHand.h"
+#include "BlueRoboRightHand.h"
 
 class Mesh;
 
@@ -19,6 +22,10 @@ protected:
 
 	double m_dSpeed;
 	double m_dAcceleration;
+
+	CBlueRoboHead* blueRoboHead;
+	CBlueRoboLeftHand* blueRoboLeftHand;
+	CBlueRoboRightHand* blueRoboRightHand;
 
 public:
 	CBlueRobo(void);

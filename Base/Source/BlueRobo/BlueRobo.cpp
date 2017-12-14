@@ -24,9 +24,10 @@ CBlueRobo::~CBlueRobo()
 void CBlueRobo::Init(float x, float y, float z)
 {
 	// Set speed
-	m_dSpeed = 0.1f;
+	m_dSpeed = 0.05f;
 	// Set the current values
 	position.Set(x, y, z);
+
 	// Initialise the Collider
 	this->SetScale(Vector3(2, 2, 2));
 	this->SetCollider(true);
@@ -36,27 +37,38 @@ void CBlueRobo::Init(float x, float y, float z)
 	// Add the pointer to this new entity to the Scene Graph
 	CSceneNode* bodyNode = CSceneGraph::GetInstance()->AddNode(this);
 
-	GenericEntity* BlueRoboHead = Create::Entity("BlueRoboHead", Vector3(x, y + 8, z));
-	BlueRoboHead->SetScale(Vector3(2, 2, 2));
-	BlueRoboHead->SetCollider(true);
-	BlueRoboHead->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	BlueRoboHead->InitLOD("BlueRoboHead", "BlueRoboHead", "sphere");
-	CSceneNode* headNode = bodyNode->AddChild(BlueRoboHead);
+	//GenericEntity* BlueRoboHead = Create::Entity("BlueRoboHead", Vector3(x, y + 8, z));
+	//BlueRoboHead->SetScale(Vector3(2, 2, 2));
+	//BlueRoboHead->SetCollider(true);
+	//BlueRoboHead->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//BlueRoboHead->InitLOD("BlueRoboHead", "BlueRoboHead", "sphere");
+	//CSceneNode* headNode = bodyNode->AddChild(BlueRoboHead);
 
-	GenericEntity* BlueRoboLeftHand = Create::Entity("BlueRoboLeftHand", Vector3(x - 4.5f, y, z));
-	BlueRoboLeftHand->SetScale(Vector3(2, 2, 2));
-	BlueRoboLeftHand->SetCollider(true);
-	BlueRoboLeftHand->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	BlueRoboLeftHand->InitLOD("BlueRoboLeftHand", "BlueRoboLeftHand", "sphere");
-	CSceneNode* leftHandNode = bodyNode->AddChild(BlueRoboLeftHand);
+	//GenericEntity* BlueRoboLeftHand = Create::Entity("BlueRoboLeftHand", Vector3(x - 4.5f, y, z));
+	//BlueRoboLeftHand->SetScale(Vector3(2, 2, 2));
+	//BlueRoboLeftHand->SetCollider(true);
+	//BlueRoboLeftHand->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//BlueRoboLeftHand->InitLOD("BlueRoboLeftHand", "BlueRoboLeftHand", "sphere");
+	//CSceneNode* leftHandNode = bodyNode->AddChild(BlueRoboLeftHand);
 
-	GenericEntity* BlueRoboRightHand = Create::Entity("BlueRoboRightHand", Vector3(x + 4.5f, y, z));
-	BlueRoboRightHand->SetScale(Vector3(2, 2, 2));
-	BlueRoboRightHand->SetCollider(true);
-	BlueRoboRightHand->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	BlueRoboRightHand->InitLOD("BlueRoboRightHand", "BlueRoboRightHand", "sphere");
-	CSceneNode* rightHandNode = bodyNode->AddChild(BlueRoboRightHand);
+	//GenericEntity* BlueRoboRightHand = Create::Entity("BlueRoboRightHand", Vector3(x + 4.5f, y, z));
+	//BlueRoboRightHand->SetScale(Vector3(2, 2, 2));
+	//BlueRoboRightHand->SetCollider(true);
+	//BlueRoboRightHand->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//BlueRoboRightHand->InitLOD("BlueRoboRightHand", "BlueRoboRightHand", "sphere");
+	//CSceneNode* rightHandNode = bodyNode->AddChild(BlueRoboRightHand);
 
+	blueRoboHead = new  CBlueRoboHead();
+	blueRoboHead->Init(x, y + 8, z);
+	CSceneNode* headNode = bodyNode->AddChild(blueRoboHead);
+
+	//blueRoboLeftHand = new CBlueRoboLeftHand();
+	//blueRoboLeftHand->Init(x , y, z);
+	//CSceneNode* leftHandNode = bodyNode->AddChild(blueRoboLeftHand);
+
+	//blueRoboRightHand = new CBlueRoboRightHand();
+	//blueRoboRightHand->Init(x , y, z);
+	//CSceneNode* rightHandNode = bodyNode->AddChild(blueRoboRightHand);
 
 	// Add to EntityManager
 	EntityManager::GetInstance()->AddEntity(this, true);
@@ -147,6 +159,7 @@ void CBlueRobo::Update(double dt)
 	// follow player
 	directionVecX = CPlayerInfo::GetInstance()->GetPos().x - GetPos().x;
 	directionVecZ = CPlayerInfo::GetInstance()->GetPos().z - GetPos().z;
+
 
 	position.x += directionVecX * (float)m_dSpeed * (float)dt;
 	position.z += directionVecZ * (float)m_dSpeed * (float)dt;

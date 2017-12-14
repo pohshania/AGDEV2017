@@ -13,7 +13,9 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\BlueRobo\BlueRobo.cpp" />
-    <ClCompile Include="Source\BlueRobo\BlueRoboPart.cpp" />
+    <ClCompile Include="Source\BlueRobo\BlueRoboHead.cpp" />
+    <ClCompile Include="Source\BlueRobo\BlueRoboLeftHand.cpp" />
+    <ClCompile Include="Source\BlueRobo\BlueRoboRightHand.cpp" />
     <ClCompile Include="Source\Enemy\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FPSCamera.cpp" />
@@ -45,7 +47,9 @@
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\BlueRobo\BlueRobo.h" />
-    <ClInclude Include="Source\BlueRobo\BlueRoboPart.h" />
+    <ClInclude Include="Source\BlueRobo\BlueRoboHead.h" />
+    <ClInclude Include="Source\BlueRobo\BlueRoboLeftHand.h" />
+    <ClInclude Include="Source\BlueRobo\BlueRoboRightHand.h" />
     <ClInclude Include="Source\Enemy\Enemy.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FPSCamera.h" />

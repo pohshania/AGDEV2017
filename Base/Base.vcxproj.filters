@@ -129,7 +129,13 @@
     <ClCompile Include="Source\BlueRobo\BlueRobo.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BlueRobo\BlueRoboPart.cpp">
+    <ClCompile Include="Source\BlueRobo\BlueRoboHead.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRoboLeftHand.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRoboRightHand.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
   </ItemGroup>
@@ -218,7 +224,13 @@
     <ClInclude Include="Source\BlueRobo\BlueRobo.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BlueRobo\BlueRoboPart.h">
+    <ClInclude Include="Source\BlueRobo\BlueRoboHead.h">
+      <Filter>BlueRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRoboLeftHand.h">
+      <Filter>BlueRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRoboRightHand.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
   </ItemGroup>

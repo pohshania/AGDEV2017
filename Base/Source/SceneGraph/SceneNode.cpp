@@ -379,6 +379,7 @@ void CSceneNode::Render(void)
 
 
 			// Render the entity
+			// IDK IF THIS IS SUPPOSED TO BE  COMMENTED  OUT LMAO BUT IT WORKS MY BRAIN IS NOT WROKING AT 5AM WOOHOO MERRY XMAS
 			theEntity->Render();
 		}
 
