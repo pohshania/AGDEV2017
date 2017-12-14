@@ -52,4 +52,4 @@ public:
 	// Render
 	void Render(void);
 };
-#pragma once
+

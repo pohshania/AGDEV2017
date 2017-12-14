@@ -12,6 +12,7 @@
 #include "SceneGraph/UpdateTransformation.h"
 #include "LevelOfDetails\LevelOfDetails.h"
 #include "Enemy\Enemy.h"
+#include "BlueRobo\BlueRobo.h"
 
 class ShaderProgram;
 class SceneManager;
@@ -41,6 +42,7 @@ private:
 	GenericEntity* theCube;
 
 	CEnemy* theEnemy;
+	CBlueRobo* blueRobo1;
 
 	static SceneText* sInstance; // The pointer to the object that gets registered
 };

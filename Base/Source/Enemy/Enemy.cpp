@@ -45,6 +45,7 @@ void CEnemy::Init(void)
 
 	// Initialise the Collider
 	this->SetCollider(true);
+
 	this->SetAABB(Vector3(1, 1, 1), Vector3(-1, -1, -1));
 
 	// Add to EntityManager

@@ -37,6 +37,9 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{cbc84f3c-d549-4814-9c2b-8a0cca9e982f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BlueRobo">
+      <UniqueIdentifier>{011657a4-d1ed-44f9-89be-72db0ee54cbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -123,6 +126,9 @@
     <ClCompile Include="Source\Enemy\Enemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRobo.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -205,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy\Enemy.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRobo.h">
+      <Filter>BlueRobo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

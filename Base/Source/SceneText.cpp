@@ -165,7 +165,7 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateRay("laser", 10.0f);
 	MeshBuilder::GetInstance()->GenerateQuad("GRIDMESH", Color(1, 1, 1), 10.f);
 
-	// Enemy
+	// Enemy Base
 	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBase", "OBJ//Enemy//EnemyBase.obj");
 	MeshBuilder::GetInstance()->GetMesh("EnemyBase")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
 	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBasePart1", "OBJ//Enemy//EnemyBasePart1.obj");
@@ -173,6 +173,13 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBasePart2", "OBJ//Enemy//EnemyBasePart2.obj");
 	MeshBuilder::GetInstance()->GetMesh("EnemyBasePart2")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
 
+	// Blue Robo
+	MeshBuilder::GetInstance()->GenerateOBJ("BlueRobo", "OBJ//Enemy//BlueRobo.obj");
+	MeshBuilder::GetInstance()->GetMesh("BlueRobo")->textureID = LoadTGA("Image//Enemy//BlueRobo.tga");
+
+	// Bullet
+	MeshBuilder::GetInstance()->GenerateOBJ("Bullet", "OBJ//bullet.obj");
+	MeshBuilder::GetInstance()->GetMesh("Bullet")->textureID = LoadTGA("Image//bullet.tga");
 
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
@@ -233,6 +240,10 @@ void SceneText::Init()
 	theEnemy = new CEnemy();
 	theEnemy->Init();
 
+	blueRobo1 = new CBlueRobo();
+	blueRobo1->Init();
+
+	// Enemy Base
 	GenericEntity* EnemyBase = Create::Asset("EnemyBase", Vector3(0.0f, 70.0f, -300.0f));
 	EnemyBase->SetScale(Vector3(3, 3, 3));
 	EnemyBase->SetCollider(true);
@@ -263,7 +274,7 @@ void SceneText::Init()
     // Create::Text3DObject("text", Vector3(0.0f, 0.0f, 0.0f), "DM2210", Vector3(10.0f, 10.0f, 10.0f), Color(0, 1, 1));
 
 	// Create cross hair
-	Create::Sprite2DObject("crosshair", Vector3(0.0f, 0.0f, 0.0f), Vector3(10.0f, 10.0f, 10.0f));
+	Create::Sprite2DObject("crosshair", Vector3(0.0f, 0.0f, 0.0f), Vector3(20.0f, 20.0f, 20.0f));
 
 	// Create skybox
 	SkyBoxEntity* theSkyBox = Create::SkyBox("SKYBOX_FRONT", "SKYBOX_BACK",
@@ -276,6 +287,7 @@ void SceneText::Init()
 	groundEntity->SetGrids(Vector3(10.0f, 1.0f, 10.0f));
 	playerInfo->SetTerrain(groundEntity);
 	theEnemy->SetTerrain(groundEntity);
+	//blueRobo1->SetTerrain(groundEntity);
 
 	// Setup the 2D entities
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
