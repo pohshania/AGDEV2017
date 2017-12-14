@@ -2,6 +2,8 @@
 #include "../GenericEntity.h"
 #include "../GroundEntity.h"
 #include "../PlayerInfo/PlayerInfo.h"
+#include "../SceneGraph/SceneGraph.h"
+#include "../SceneGraph/SceneNode.h"
 
 class Mesh;
 
@@ -22,7 +24,7 @@ public:
 	CBlueRobo(void);
 	virtual ~CBlueRobo();
 
-	void Init(void);
+	void Init(float x, float y, float z);
 	// Reset this player instance to default
 	void Reset(void);
 

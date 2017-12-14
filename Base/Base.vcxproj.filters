@@ -129,6 +129,9 @@
     <ClCompile Include="Source\BlueRobo\BlueRobo.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRoboPart.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -213,6 +216,9 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Source\BlueRobo\BlueRobo.h">
+      <Filter>BlueRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRoboPart.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
   </ItemGroup>
