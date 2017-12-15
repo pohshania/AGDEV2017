@@ -180,10 +180,16 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GetMesh("BlueRoboHead")->textureID = LoadTGA("Image//Enemy//BlueRobo.tga");
 	MeshBuilder::GetInstance()->GenerateOBJ("BlueRoboBody", "OBJ//Enemy//BlueRoboBody.obj");
 	MeshBuilder::GetInstance()->GetMesh("BlueRoboBody")->textureID = LoadTGA("Image//Enemy//BlueRobo.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("BlueRoboLeftHand", "OBJ//Enemy//BlueRoboLeftHand.obj");
-	MeshBuilder::GetInstance()->GetMesh("BlueRoboLeftHand")->textureID = LoadTGA("Image//Enemy//BlueRobo.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("BlueRoboRightHand", "OBJ//Enemy//BlueRoboRightHand.obj");
-	MeshBuilder::GetInstance()->GetMesh("BlueRoboRightHand")->textureID = LoadTGA("Image//Enemy//BlueRobo.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("BlueRoboBottom", "OBJ//Enemy//BlueRoboBottom.obj");
+	MeshBuilder::GetInstance()->GetMesh("BlueRoboBottom")->textureID = LoadTGA("Image//Enemy//BlueRobo.tga");
+
+	// Red Robo
+	MeshBuilder::GetInstance()->GenerateOBJ("RedRoboHead", "OBJ//Enemy//RedRoboHead.obj");
+	MeshBuilder::GetInstance()->GetMesh("RedRoboHead")->textureID = LoadTGA("Image//Enemy//RedRobo.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RedRoboBody", "OBJ//Enemy//RedRoboBody.obj");
+	MeshBuilder::GetInstance()->GetMesh("RedRoboBody")->textureID = LoadTGA("Image//Enemy//RedRobo.tga");
+	MeshBuilder::GetInstance()->GenerateOBJ("RedRoboBottom", "OBJ//Enemy//RedRoboBottom.obj");
+	MeshBuilder::GetInstance()->GetMesh("RedRoboBottom")->textureID = LoadTGA("Image//Enemy//RedRobo.tga");
 
 	// Bullet
 	MeshBuilder::GetInstance()->GenerateOBJ("Bullet", "OBJ//bullet.obj");
@@ -200,96 +206,108 @@ void SceneText::Init()
 	EntityManager::GetInstance()->SetSpatialPartition(CSpatialPartition::GetInstance());
 
 	// Create entities into the scene
-	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
-	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
+	//Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
+	//Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
 
-	GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f));
-	aCube->SetCollider(true);
-	aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	aCube->InitLOD("cube", "sphere", "cubeSG");
+	//GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f));
+	//aCube->SetCollider(true);
+	//aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	//aCube->InitLOD("cube", "sphere", "cubeSG");
 
-	// Add the pointer to this new entity to the Scene Graph
-	CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
-	if (theNode == NULL)
-	{
-		cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	}
+	//// Add the pointer to this new entity to the Scene Graph
+	//CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
+	//if (theNode == NULL)
+	//{
+	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
+	//}
 
-	GenericEntity* anotherCube = Create::Entity("cube", Vector3(-20.0f, 5.0f, -20.0f));
-	anotherCube->SetCollider(true);
-	anotherCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	CSceneNode* anotherNode = theNode->AddChild(anotherCube);
-	if (anotherNode == NULL)
-	{
-		cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	}
+	//GenericEntity* anotherCube = Create::Entity("cube", Vector3(-20.0f, 5.0f, -20.0f));
+	//anotherCube->SetCollider(true);
+	//anotherCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	//CSceneNode* anotherNode = theNode->AddChild(anotherCube);
+	//if (anotherNode == NULL)
+	//{
+	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
+	//}
 
 
 
 	// BLUE ROBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBO !!@$@#%@#%
-	GenericEntity* anotherCube2 = Create::Entity("BlueRoboHead", Vector3(0.0f, 4.0f, 50.0f));
-	anotherCube2->SetCollider(true);
-	anotherCube2->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	GenericEntity* anotherCube3 = Create::Entity("BlueRoboBody", Vector3(0.0f, 0.0f, 50.0f));
-	anotherCube3->SetCollider(true);
-	anotherCube3->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	GenericEntity* anotherCube4 = Create::Entity("BlueRoboLeftHand", Vector3(-2.35f, 0.0f, 50.0f));
-	anotherCube4->SetCollider(true);
-	anotherCube4->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	GenericEntity* anotherCube5 = Create::Entity("BlueRoboRightHand", Vector3(2.35f, 0.0f, 50.0f));
-	anotherCube5->SetCollider(true);
-	anotherCube5->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//GenericEntity* anotherCube2 = Create::Entity("BlueRoboHead", Vector3(0.0f, 4.0f, 50.0f));
+	//anotherCube2->SetCollider(true);
+	//anotherCube2->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//GenericEntity* anotherCube3 = Create::Entity("BlueRoboBody", Vector3(0.0f, 0.0f, 50.0f));
+	//anotherCube3->SetCollider(true);
+	//anotherCube3->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//GenericEntity* anotherCube4 = Create::Entity("BlueRoboLeftHand", Vector3(-2.35f, 0.0f, 50.0f));
+	//anotherCube4->SetCollider(true);
+	//anotherCube4->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	//GenericEntity* anotherCube5 = Create::Entity("BlueRoboRightHand", Vector3(2.35f, 0.0f, 50.0f));
+	//anotherCube5->SetCollider(true);
+	//anotherCube5->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
 
 	// Transform stuff
-	GenericEntity* baseCube = Create::Asset("cube", Vector3(0.0f, 0.0f, 0.0f));
-	CSceneNode* baseNode = CSceneGraph::GetInstance()->AddNode(baseCube);
+	//GenericEntity* baseCube = Create::Asset("cube", Vector3(0.0f, 0.0f, 0.0f));
+	//CSceneNode* baseNode = CSceneGraph::GetInstance()->AddNode(baseCube);
 
-	CUpdateTransformation* baseMtx = new CUpdateTransformation();
-	baseMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	baseMtx->SetSteps(-60, 60);
-	baseNode->SetUpdateTransformation(baseMtx);
+	//CUpdateTransformation* baseMtx = new CUpdateTransformation();
+	//baseMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
+	//baseMtx->SetSteps(-60, 60);
+	//baseNode->SetUpdateTransformation(baseMtx);
 
-	GenericEntity* childCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	CSceneNode* childNode = baseNode->AddChild(childCube);
-	childNode->ApplyTranslate(0.0f, 1.0f, 0.0f);
+	//GenericEntity* childCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
+	//CSceneNode* childNode = baseNode->AddChild(childCube);
+	//childNode->ApplyTranslate(0.0f, 1.0f, 0.0f);
 
-	GenericEntity* grandchildCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	CSceneNode* grandchildNode = childNode->AddChild(grandchildCube);
-	grandchildNode->ApplyTranslate(0.0f, 0.0f, 1.0f);
-	CUpdateTransformation* aRotateMtx = new CUpdateTransformation();
-	aRotateMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	aRotateMtx->SetSteps(-120, 60);
-	grandchildNode->SetUpdateTransformation(aRotateMtx);
+	//GenericEntity* grandchildCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
+	//CSceneNode* grandchildNode = childNode->AddChild(grandchildCube);
+	//grandchildNode->ApplyTranslate(0.0f, 0.0f, 1.0f);
+	//CUpdateTransformation* aRotateMtx = new CUpdateTransformation();
+	//aRotateMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
+	//aRotateMtx->SetSteps(-120, 60);
+	//grandchildNode->SetUpdateTransformation(aRotateMtx);
 
 	// Creating enemy instances
-	theEnemy = new CEnemy();
-	theEnemy->Init();
+	//theEnemy = new CEnemy();
+	//theEnemy->Init();
 
 	blueRobo1 = new CBlueRobo();
-	blueRobo1->Init(0, -3.5, 0);
+	blueRobo1->Init(0, -2.4, -65);
+
+	redRobo1 = new CRedRobo();
+	redRobo1->Init(-40, -2.5, -65);
 
 	// Enemy Base
-	GenericEntity* EnemyBase = Create::Asset("EnemyBase", Vector3(0.0f, 70.0f, -300.0f));
+	GenericEntity* EnemyBase = Create::Asset("EnemyBase", Vector3(0.0f, 44.5f, -300.0f));
 	EnemyBase->SetScale(Vector3(3, 3, 3));
 	EnemyBase->SetCollider(true);
 	EnemyBase->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
 	EnemyBase->InitLOD("EnemyBase", "EnemyBase", "cubeSG");
 	CSceneNode* EnemyBaseNode = CSceneGraph::GetInstance()->AddNode(EnemyBase) ;
 
-	GenericEntity* EnemyBasePart1 = Create::Asset("EnemyBasePart1", Vector3(0.0f, 70.0f, -300.0f));
+	GenericEntity* EnemyBasePart1 = Create::Asset("EnemyBasePart1", Vector3(0.0f, 44.5f, -300.0f));
 	EnemyBasePart1->SetScale(Vector3(3, 3, 3));
 	EnemyBasePart1->SetCollider(true);
 	EnemyBasePart1->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
 	EnemyBasePart1->InitLOD("EnemyBasePart1", "EnemyBasePart1", "cubeSG");
 	CSceneNode* EnemyBasePart1Node = EnemyBaseNode->AddChild(EnemyBasePart1);
 
-	GenericEntity* EnemyBasePart2 = Create::Asset("EnemyBasePart2", Vector3(0.0f, 70.0f, -300.0f));
+	CUpdateTransformation* basePart1 = new CUpdateTransformation();
+	basePart1->ApplyUpdate(0.0f, 0.1f, 0.0f);
+	basePart1->SetSteps(-40, 40);
+	EnemyBasePart1Node->SetUpdateTransformation(basePart1);
+
+	GenericEntity* EnemyBasePart2 = Create::Asset("EnemyBasePart2", Vector3(0.0f, 44.5f, -300.0f));
 	EnemyBasePart2->SetScale(Vector3(3, 3, 3));
 	EnemyBasePart2->SetCollider(true);
 	EnemyBasePart2->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
 	EnemyBasePart2->InitLOD("EnemyBasePart2", "EnemyBasePart2", "cubeSG");
 	CSceneNode* EnemyBasePart2Node = EnemyBaseNode->AddChild(EnemyBasePart2);
 
+	CUpdateTransformation* basePart2 = new CUpdateTransformation();
+	basePart2->ApplyUpdate(0.0f, 0.1f, 0.0f);
+	basePart2->SetSteps(-40, 40);
+	EnemyBasePart2Node->SetUpdateTransformation(basePart2);
 
 
 	// Create ground
@@ -310,7 +328,7 @@ void SceneText::Init()
 	groundEntity->SetScale(Vector3(80.0f, 80.0f, 80.0f));
 	groundEntity->SetGrids(Vector3(10.0f, 1.0f, 10.0f));
 	playerInfo->SetTerrain(groundEntity);
-	theEnemy->SetTerrain(groundEntity);
+	//theEnemy->SetTerrain(groundEntity);
 	//blueRobo1->SetTerrain(groundEntity);
 
 	// Setup the 2D entities

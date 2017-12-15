@@ -5,8 +5,8 @@
 #include "../SceneGraph/SceneGraph.h"
 #include "../SceneGraph/SceneNode.h"
 #include "BlueRoboHead.h"
-#include "BlueRoboLeftHand.h"
-#include "BlueRoboRightHand.h"
+#include "BlueRoboBottom.h"
+
 
 class Mesh;
 
@@ -24,8 +24,7 @@ protected:
 	double m_dAcceleration;
 
 	CBlueRoboHead* blueRoboHead;
-	CBlueRoboLeftHand* blueRoboLeftHand;
-	CBlueRoboRightHand* blueRoboRightHand;
+	CBlueRoboBottom* blueRoboBottom;
 
 public:
 	CBlueRobo(void);

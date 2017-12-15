@@ -29,7 +29,7 @@ void CBlueRobo::Init(float x, float y, float z)
 	position.Set(x, y, z);
 
 	// Initialise the Collider
-	this->SetScale(Vector3(2, 2, 2));
+	this->SetScale(Vector3(2.5, 2.5, 2.5));
 	this->SetCollider(true);
 	this->SetAABB(Vector3(2, 2, 2), Vector3(-1, -1, -1));
 	// Initialise the LOD meshes
@@ -59,16 +59,12 @@ void CBlueRobo::Init(float x, float y, float z)
 	//CSceneNode* rightHandNode = bodyNode->AddChild(BlueRoboRightHand);
 
 	blueRoboHead = new  CBlueRoboHead();
-	blueRoboHead->Init(x, y + 8, z);
+	blueRoboHead->Init(x, y + 6.5, z);
 	CSceneNode* headNode = bodyNode->AddChild(blueRoboHead);
 
-	//blueRoboLeftHand = new CBlueRoboLeftHand();
-	//blueRoboLeftHand->Init(x , y, z);
-	//CSceneNode* leftHandNode = bodyNode->AddChild(blueRoboLeftHand);
-
-	//blueRoboRightHand = new CBlueRoboRightHand();
-	//blueRoboRightHand->Init(x , y, z);
-	//CSceneNode* rightHandNode = bodyNode->AddChild(blueRoboRightHand);
+	blueRoboBottom = new CBlueRoboBottom();
+	blueRoboBottom->Init(x, y - 5.5f, z);
+	CSceneNode* bottomNode = bodyNode->AddChild(blueRoboBottom);
 
 	// Add to EntityManager
 	EntityManager::GetInstance()->AddEntity(this, true);

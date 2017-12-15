@@ -13,9 +13,8 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\BlueRobo\BlueRobo.cpp" />
+    <ClCompile Include="Source\BlueRobo\BlueRoboBottom.cpp" />
     <ClCompile Include="Source\BlueRobo\BlueRoboHead.cpp" />
-    <ClCompile Include="Source\BlueRobo\BlueRoboLeftHand.cpp" />
-    <ClCompile Include="Source\BlueRobo\BlueRoboRightHand.cpp" />
     <ClCompile Include="Source\Enemy\Enemy.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FPSCamera.cpp" />
@@ -29,6 +28,9 @@
     <ClCompile Include="Source\Projectile\Grenade.cpp" />
     <ClCompile Include="Source\Projectile\Laser.cpp" />
     <ClCompile Include="Source\Projectile\Projectile.cpp" />
+    <ClCompile Include="Source\RedRobo\RedRobo.cpp" />
+    <ClCompile Include="Source\RedRobo\RedRoboBottom.cpp" />
+    <ClCompile Include="Source\RedRobo\RedRoboHead.cpp" />
     <ClCompile Include="Source\SceneGraph\SceneGraph.cpp" />
     <ClCompile Include="Source\SceneGraph\SceneNode.cpp" />
     <ClCompile Include="Source\SceneGraph\Transform.cpp" />
@@ -47,9 +49,8 @@
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\BlueRobo\BlueRobo.h" />
+    <ClInclude Include="Source\BlueRobo\BlueRoboBottom.h" />
     <ClInclude Include="Source\BlueRobo\BlueRoboHead.h" />
-    <ClInclude Include="Source\BlueRobo\BlueRoboLeftHand.h" />
-    <ClInclude Include="Source\BlueRobo\BlueRoboRightHand.h" />
     <ClInclude Include="Source\Enemy\Enemy.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FPSCamera.h" />
@@ -62,6 +63,9 @@
     <ClInclude Include="Source\Projectile\Grenade.h" />
     <ClInclude Include="Source\Projectile\Laser.h" />
     <ClInclude Include="Source\Projectile\Projectile.h" />
+    <ClInclude Include="Source\RedRobo\RedRobo.h" />
+    <ClInclude Include="Source\RedRobo\RedRoboBottom.h" />
+    <ClInclude Include="Source\RedRobo\RedRoboHead.h" />
     <ClInclude Include="Source\SceneGraph\SceneGraph.h" />
     <ClInclude Include="Source\SceneGraph\SceneNode.h" />
     <ClInclude Include="Source\SceneGraph\Transform.h" />

@@ -40,6 +40,9 @@
     <Filter Include="BlueRobo">
       <UniqueIdentifier>{011657a4-d1ed-44f9-89be-72db0ee54cbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RedRobo">
+      <UniqueIdentifier>{ff6259e7-c01f-46eb-9ed4-43b59c62fc3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -132,11 +135,17 @@
     <ClCompile Include="Source\BlueRobo\BlueRoboHead.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BlueRobo\BlueRoboLeftHand.cpp">
+    <ClCompile Include="Source\BlueRobo\BlueRoboBottom.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BlueRobo\BlueRoboRightHand.cpp">
-      <Filter>BlueRobo</Filter>
+    <ClCompile Include="Source\RedRobo\RedRobo.cpp">
+      <Filter>RedRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RedRobo\RedRoboHead.cpp">
+      <Filter>RedRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RedRobo\RedRoboBottom.cpp">
+      <Filter>RedRobo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,11 +236,17 @@
     <ClInclude Include="Source\BlueRobo\BlueRoboHead.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BlueRobo\BlueRoboLeftHand.h">
+    <ClInclude Include="Source\BlueRobo\BlueRoboBottom.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BlueRobo\BlueRoboRightHand.h">
-      <Filter>BlueRobo</Filter>
+    <ClInclude Include="Source\RedRobo\RedRobo.h">
+      <Filter>RedRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RedRobo\RedRoboHead.h">
+      <Filter>RedRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RedRobo\RedRoboBottom.h">
+      <Filter>RedRobo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

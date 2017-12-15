@@ -13,6 +13,7 @@
 #include "LevelOfDetails\LevelOfDetails.h"
 #include "Enemy\Enemy.h"
 #include "BlueRobo\BlueRobo.h"
+#include "RedRobo\RedRobo.h"
 
 class ShaderProgram;
 class SceneManager;
@@ -43,6 +44,7 @@ private:
 
 	CEnemy* theEnemy;
 	CBlueRobo* blueRobo1;
+	CRedRobo* redRobo1;
 
 	static SceneText* sInstance; // The pointer to the object that gets registered
 };

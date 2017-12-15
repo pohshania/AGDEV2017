@@ -29,7 +29,7 @@ void CBlueRoboHead::Init(float x, float y, float z)
 	position.Set(x, y, z);
 
 	// Initialise the Collider
-	this->SetScale(Vector3(2, 2, 2));
+	this->SetScale(Vector3(2.5, 2.5, 2.5));
 	this->SetCollider(true);
 	this->SetAABB(Vector3(1, 1, 1), Vector3(-1, -1, -1));
 	// Initialise the LOD meshes
