@@ -3,6 +3,7 @@
 #include "MeshBuilder.h"
 #include "RenderHelper.h"
 #include "../GenericEntity.h"
+#include "../PlayerInfo/PlayerInfo.h"
 
 /********************************************************************************
 Constructor
@@ -35,9 +36,9 @@ CGrid::~CGrid(void)
 /********************************************************************************
 Initialise this grid
 ********************************************************************************/
-void CGrid::Init(	const int xIndex, const int zIndex,
-					const int xGridSize, const int zGridSize,
-					const float xOffset, const float zOffset)
+void CGrid::Init(const int xIndex, const int zIndex,
+	const int xGridSize, const int zGridSize,
+	const float xOffset, const float zOffset)
 {
 	index.Set(xIndex, 0, zIndex);
 	size.Set(xGridSize, 0, zGridSize);
@@ -47,7 +48,7 @@ void CGrid::Init(	const int xIndex, const int zIndex,
 }
 
 /********************************************************************************
- Set a particular grid's Mesh
+Set a particular grid's Mesh
 ********************************************************************************/
 void CGrid::SetMesh(const std::string& _meshName)
 {
@@ -92,9 +93,20 @@ void CGrid::Render(void)
 {
 	if (theMesh)
 	{
+		MS& modelStack = GraphicsManager::GetInstance()->GetModelStack();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		RenderHelper::RenderMesh(theMesh);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		Vector3 pos = CPlayerInfo::GetInstance()->GetPos();
+		if (min.x < pos.x && max.x > pos.x &&
+			min.z < pos.z && max.z > pos.z)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(0.5, -0.5, 0);
+			RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("MoonS"));
+			modelStack.PopMatrix();
+		}
 	}
 }
 
@@ -124,15 +136,15 @@ void CGrid::Add(EntityBase* theObject)
 		if (ListOfObjects[i] == theObject)
 			return;
 	}
-	ListOfObjects.push_back( theObject );
+	ListOfObjects.push_back(theObject);
 }
 
 /********************************************************************************
- Remove but not delete object from this grid
+Remove but not delete object from this grid
 ********************************************************************************/
 void CGrid::Remove(void)
 {
-	for( int i = 0 ; i < ListOfObjects.size(); i++)
+	for (int i = 0; i < ListOfObjects.size(); i++)
 	{
 		// Do not delete the objects as they are stored in EntityManager and will be deleted there.
 		//delete ListOfObjects[i];
@@ -142,7 +154,7 @@ void CGrid::Remove(void)
 }
 
 /********************************************************************************
- Remove but not delete an object from this grid
+Remove but not delete an object from this grid
 ********************************************************************************/
 bool CGrid::Remove(EntityBase* theObject)
 {
@@ -167,7 +179,7 @@ bool CGrid::Remove(EntityBase* theObject)
 }
 
 /********************************************************************************
- Check if an object is in this grid
+Check if an object is in this grid
 ********************************************************************************/
 bool CGrid::IsHere(EntityBase* theObject) const
 {

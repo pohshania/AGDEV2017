@@ -209,6 +209,8 @@ void SceneText::Init()
 
 	EntityManager::GetInstance()->SetSpatialPartition(CSpatialPartition::GetInstance());
 
+	MeshBuilder::GetInstance()->GenerateQuad("MoonS", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("MoonS")->textureID = LoadTGA("Image//MoonS.tga");
 	// Create entities into the scene
 	//Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
 	//Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
