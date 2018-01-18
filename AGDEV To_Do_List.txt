@@ -1,0 +1,18 @@
+Scene Graph:
+- robot: shoot where, where drop 
+- rotation
+
+Spatial Partioning:
+- Light up the region where the player is standing on
+- Highlight a grid where the player is standing
+- More than 1 enemy standing in the grid , change colour
+LOD:
+- same environmental models with different poly counts
+
+Collision detection:
+- kill enemy with bullet
+- when enemy touches player minus health
+- collect keys
+
+Gameplay:
+- collect all 5 keys and find the door to win game!
