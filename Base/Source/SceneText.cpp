@@ -195,6 +195,10 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateOBJ("Bullet", "OBJ//bullet.obj");
 	MeshBuilder::GetInstance()->GetMesh("Bullet")->textureID = LoadTGA("Image//bullet.tga");
 
+	// Spaceship
+	MeshBuilder::GetInstance()->GenerateOBJ("Spaceship", "OBJ//spaceship.obj");
+	MeshBuilder::GetInstance()->GetMesh("Spaceship")->textureID = LoadTGA("Image//spaceship.tga");
+
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
 	CSpatialPartition::GetInstance()->SetMesh("GRIDMESH");
@@ -309,6 +313,12 @@ void SceneText::Init()
 	basePart2->SetSteps(-40, 40);
 	EnemyBasePart2Node->SetUpdateTransformation(basePart2);
 
+	// Spaceship
+	GenericEntity* Spaceship = Create::Entity("Spaceship", Vector3(50.0f, 20.0f, 0.0f));
+	Spaceship->SetScale(Vector3(6, 6, 6));
+	Spaceship->SetCollider(true);
+	Spaceship->SetAABB(Vector3(6.f, 6.f, 6.f), Vector3(-6.f, -6.f, -6.f));
+	Spaceship->InitLOD("Spaceship", "sphere", "cube");
 
 	// Create ground
 	groundEntity = Create::Ground("GRASS_DARKGREEN", "GEO_GRASS_LIGHTGREEN");
