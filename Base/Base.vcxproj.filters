@@ -147,6 +147,12 @@
     <ClCompile Include="Source\RedRobo\RedRoboBottom.cpp">
       <Filter>RedRobo</Filter>
     </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRoboSingle.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RedRobo\RedRoboSingle.cpp">
+      <Filter>RedRobo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -246,6 +252,12 @@
       <Filter>RedRobo</Filter>
     </ClInclude>
     <ClInclude Include="Source\RedRobo\RedRoboBottom.h">
+      <Filter>RedRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRoboSingle.h">
+      <Filter>BlueRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RedRobo\RedRoboSingle.h">
       <Filter>RedRobo</Filter>
     </ClInclude>
   </ItemGroup>

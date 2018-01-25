@@ -3,6 +3,10 @@
 #include "Collider/Collider.h"
 #include "Projectile/Laser.h"
 #include "SceneGraph\SceneGraph.h"
+#include "BlueRobo\BlueRobo.h" 
+#include "BlueRobo\BlueRoboSingle.h"
+#include "RedRobo\RedRobo.h"
+#include "RedRobo\RedRoboSingle.h"
 
 #include <iostream>
 using namespace std;
@@ -349,6 +353,8 @@ bool EntityManager::CheckForCollision(void)
 
 				if ((*colliderThat)->HasCollider())
 				{
+
+					
 					Vector3 hitPosition = Vector3(0, 0, 0);
 
 					// Get the minAABB and maxAABB for (*colliderThat)
@@ -368,6 +374,7 @@ bool EntityManager::CheckForCollision(void)
 						if (CSceneGraph::GetInstance()->DeleteNode((*colliderThis)) == true)
 						{
 							cout << "*** This Entity removed ***" << endl;
+
 		
 						}
 						// Remove from Scene Graph
@@ -382,6 +389,7 @@ bool EntityManager::CheckForCollision(void)
 		}
 		else if ((*colliderThis)->HasCollider())
 		{
+
 			// This object was derived from a CCollider class, then it will have Collision Detection methods
 			//CCollider *thisCollider = dynamic_cast<CCollider*>(*colliderThis);
 			EntityBase *thisEntity = dynamic_cast<EntityBase*>(*colliderThis);
@@ -396,11 +404,15 @@ bool EntityManager::CheckForCollision(void)
 
 				if ((*colliderThat)->HasCollider())
 				{
+
 					EntityBase *thatEntity = dynamic_cast<EntityBase*>(*colliderThat);
 					if (CheckSphereCollision(thisEntity, thatEntity))
 					{
 						if (CheckAABBCollision(thisEntity, thatEntity))
 						{
+							// HELLO THIS IS WHERE THE BULLET HIT AND DESTROY PART
+							cout << "BULLET HIT!" << endl;
+
 							thisEntity->SetIsDone(true);
 							thatEntity->SetIsDone(true);
 
@@ -413,6 +425,40 @@ bool EntityManager::CheckForCollision(void)
 							if (CSceneGraph::GetInstance()->DeleteNode((*colliderThat)) == true)
 							{
 								cout << "*** That Entity removed ***" << endl;
+							}
+
+							// Remove from bluerobos list
+							for (vector<CBlueRobo*>::iterator blueRoboIT = BlueRoboSingleton::GetInstance()->BlueRobos.begin(); blueRoboIT != BlueRoboSingleton::GetInstance()->BlueRobos.end(); blueRoboIT++)
+							{
+								if ((*colliderThat)->GetPosition() == (*blueRoboIT)->GetPosition())
+								{
+									BlueRoboSingleton::GetInstance()->BlueRobos.erase(blueRoboIT);
+									cout << "Remove from BlueRobo vector" << endl;
+									break;
+								}
+								else if ((*colliderThis)->GetPosition() == (*blueRoboIT)->GetPosition())
+								{
+									BlueRoboSingleton::GetInstance()->BlueRobos.erase(blueRoboIT);
+									cout << "Remove from BlueRobo vector" << endl;
+									break;
+								}
+							}
+
+							// Remove from redrobos list
+							for (vector<CRedRobo*>::iterator redRoboIT = RedRoboSingleton::GetInstance()->RedRobos.begin(); redRoboIT != RedRoboSingleton::GetInstance()->RedRobos.end(); redRoboIT++)
+							{
+								if ((*colliderThat)->GetPosition() == (*redRoboIT)->GetPosition())
+								{
+									RedRoboSingleton::GetInstance()->RedRobos.erase(redRoboIT);
+									cout << "Remove from RedRobo vector" << endl;
+									break;
+								}
+								else if ((*colliderThis)->GetPosition() == (*redRoboIT)->GetPosition())
+								{
+									RedRoboSingleton::GetInstance()->RedRobos.erase(redRoboIT);
+									cout << "Remove from RedRobo vector" << endl;
+									break;
+								}
 							}
 
 						}

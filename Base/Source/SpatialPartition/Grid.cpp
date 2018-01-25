@@ -4,6 +4,8 @@
 #include "RenderHelper.h"
 #include "../GenericEntity.h"
 #include "../PlayerInfo/PlayerInfo.h"
+#include "../BlueRobo/BlueRoboSingle.h"
+#include "../RedRobo/RedRoboSingle.h"
 
 /********************************************************************************
 Constructor
@@ -64,6 +66,18 @@ Update the grid
 ********************************************************************************/
 void CGrid::Update(vector<EntityBase*>* migrationList)
 {
+	// get the positions for all bluerobos
+	for (size_t i = 0; i < BlueRoboSingleton::GetInstance()->BlueRobos.size(); i++)
+	{
+		//cout << BlueRoboSingleton::GetInstance()->BlueRobos[i]->GetPosition();
+	}
+
+	// get the positions for all redrobos
+	for (size_t i = 0; i < RedRoboSingleton::GetInstance()->RedRobos.size(); i++)
+	{
+		//cout << RedRoboSingleton::GetInstance()->RedRobos[i]->GetPosition();
+	}
+
 	// Check each object to see if they are no longer in this grid
 	std::vector<EntityBase*>::iterator it;
 	it = ListOfObjects.begin();

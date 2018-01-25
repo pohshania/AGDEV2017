@@ -115,6 +115,7 @@ Update the spatial partition
 ********************************************************************************/
 void CSpatialPartition::Update(void)
 {
+
 	for (int i = 0; i<xNumOfGrid; i++)
 	{
 		for (int j = 0; j < zNumOfGrid; j++)

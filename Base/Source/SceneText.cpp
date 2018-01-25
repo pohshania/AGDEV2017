@@ -22,6 +22,8 @@
 #include "SkyBox/SkyBoxEntity.h"
 #include "SceneGraph\SceneGraph.h"
 #include "SpatialPartition\SpatialPartition.h"
+#include "BlueRobo\BlueRoboSingle.h"
+#include "RedRobo\RedRoboSingle.h"
 
 #include <iostream>
 using namespace std;
@@ -279,9 +281,12 @@ void SceneText::Init()
 
 	blueRobo1 = new CBlueRobo();
 	blueRobo1->Init(0, -2.4, -65);
+	BlueRoboSingleton::GetInstance()->BlueRobos.push_back(blueRobo1);
 
 	redRobo1 = new CRedRobo();
 	redRobo1->Init(-40, -2.5, -65);
+	RedRoboSingleton::GetInstance()->RedRobos.push_back(redRobo1);
+
 
 	// Enemy Base
 	GenericEntity* EnemyBase = Create::Asset("EnemyBase", Vector3(0.0f, 44.5f, -300.0f));
@@ -449,6 +454,8 @@ void SceneText::Update(double dt)
 	ss1.precision(4);
 	ss1 << "Player:" << playerInfo->GetPos();
 	textObj[2]->SetText(ss1.str());
+	
+	//cout << blueRobo1->GetPosition();
 }
 
 void SceneText::Render()
