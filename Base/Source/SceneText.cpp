@@ -211,8 +211,15 @@ void SceneText::Init()
 
 	EntityManager::GetInstance()->SetSpatialPartition(CSpatialPartition::GetInstance());
 
-	MeshBuilder::GetInstance()->GenerateQuad("MoonS", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("MoonS")->textureID = LoadTGA("Image//MoonS.tga");
+	MeshBuilder::GetInstance()->GenerateQuad("PlayerHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("PlayerHighlight")->textureID = LoadTGA("Image//PlayerHighlight.tga");
+
+	MeshBuilder::GetInstance()->GenerateQuad("BlueHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("BlueHighlight")->textureID = LoadTGA("Image//BlueHighlight.tga");
+
+	MeshBuilder::GetInstance()->GenerateQuad("RedHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("RedHighlight")->textureID = LoadTGA("Image//RedHighlight.tga");
+
 	// Create entities into the scene
 	//Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
 	//Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
@@ -280,7 +287,7 @@ void SceneText::Init()
 	//theEnemy->Init();
 
 	blueRobo1 = new CBlueRobo();
-	blueRobo1->Init(0, -2.4, -65);
+	blueRobo1->Init(40, -2.4, -65);
 	BlueRoboSingleton::GetInstance()->BlueRobos.push_back(blueRobo1);
 
 	redRobo1 = new CRedRobo();

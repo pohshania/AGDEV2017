@@ -1,6 +1,82 @@
-﻿  EntityManager.cpp
-c:\users\shania\desktop\agdev2017\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  WeaponInfo.cpp
+  Pistol.cpp
+  LaserBlaster.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  GrenadeThrow.cpp
+  TextEntity.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  SpriteEntity.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  SpatialPartition.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\spatialpartition.cpp(70): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\spatialpartition.cpp(154): warning C4018: '<': signed/unsigned mismatch
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\spatialpartition.cpp(178): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\spatialpartition.cpp(180): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Grid.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\grid.cpp(45): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\grid.cpp(46): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\grid.cpp(174): warning C4018: '<': signed/unsigned mismatch
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\grid.cpp(187): warning C4018: '<': signed/unsigned mismatch
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\grid.cpp(226): warning C4018: '<': signed/unsigned mismatch
+c:\users\hm\desktop\agdev2017 updated\base\source\spatialpartition\grid.cpp(254): warning C4018: '<': signed/unsigned mismatch
+  SkyBoxEntity.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  SceneText.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\hm\desktop\agdev2017 updated\base\source\scenetext.cpp(290): warning C4305: 'argument': truncation from 'double' to 'float'
+  UpdateTransformation.cpp
+  Transform.cpp
+  SceneNode.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  SceneGraph.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  RedRoboSingle.cpp
+  RedRoboHead.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\hm\desktop\agdev2017 updated\base\source\redrobo\redrobohead.cpp(32): warning C4305: 'argument': truncation from 'double' to 'float'
+  RedRoboBottom.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\hm\desktop\agdev2017 updated\base\source\redrobo\redrobobottom.cpp(32): warning C4305: 'argument': truncation from 'double' to 'float'
+  RedRobo.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\hm\desktop\agdev2017 updated\base\source\redrobo\redrobo.cpp(32): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\hm\desktop\agdev2017 updated\base\source\redrobo\redrobo.cpp(62): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Projectile.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Laser.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+  Compiling...
+  Grenade.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\hm\desktop\agdev2017 updated\base\source\projectile\grenade.cpp(54): warning C4018: '<': signed/unsigned mismatch
+c:\users\hm\desktop\agdev2017 updated\base\source\projectile\grenade.cpp(69): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\hm\desktop\agdev2017 updated\base\source\projectile\grenade.cpp(73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  PlayerInfo.cpp
+  OBJMesh.cpp
+  main.cpp
+  Light.cpp
+  LevelOfDetails.cpp
+  GroundEntity.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  GenericEntity.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  FPSCamera.cpp
+  EntityManager.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Enemy.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  BlueRoboSingle.cpp
+  BlueRoboHead.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  BlueRoboBottom.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  BlueRobo.cpp
+c:\users\hm\desktop\agdev2017 updated\base\source\entitymanager.h(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\hm\desktop\agdev2017 updated\base\source\bluerobo\bluerobo.cpp(62): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Application.cpp
+  Generating Code...
 Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Base.vcxproj -> C:\Users\Shania\Desktop\AGDEV2017\Debug\Base.exe
-  Base.vcxproj -> C:\Users\Shania\Desktop\AGDEV2017\Debug\Base.pdb (Full PDB)
+  Base.vcxproj -> C:\Users\HM\Desktop\AGDev2017 Updated\Debug\Base.exe
+  Base.vcxproj -> C:\Users\HM\Desktop\AGDev2017 Updated\Debug\Base.pdb (Full PDB)

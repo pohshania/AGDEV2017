@@ -118,8 +118,34 @@ void CGrid::Render(void)
 		{
 			modelStack.PushMatrix();
 			modelStack.Translate(0.5, -0.5, 0);
-			RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("MoonS"));
+			RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("PlayerHighlight"));
 			modelStack.PopMatrix();
+		}
+
+		for (size_t i = 0; i < BlueRoboSingleton::GetInstance()->BlueRobos.size(); i++)
+		{
+			Vector3 pos2 = BlueRoboSingleton::GetInstance()->BlueRobos[i]->GetPosition();
+			if (min.x < pos2.x && max.x > pos2.x &&
+				min.z < pos2.z && max.z > pos2.z)
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(0.5, -0.5, 0);
+				RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("BlueHighlight"));
+				modelStack.PopMatrix();
+			}
+		}
+
+		for (size_t i = 0; i < RedRoboSingleton::GetInstance()->RedRobos.size(); i++)
+		{
+			Vector3 pos3 = RedRoboSingleton::GetInstance()->RedRobos[i]->GetPosition();
+			if (min.x < pos3.x && max.x > pos3.x &&
+				min.z < pos3.z && max.z > pos3.z)
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(0.5, -0.5, 0);
+				RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("RedHighlight"));
+				modelStack.PopMatrix();
+			}
 		}
 	}
 }
