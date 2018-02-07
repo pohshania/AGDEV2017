@@ -2,10 +2,11 @@
 #include "../EntityManager.h"
 #include "GraphicsManager.h"
 #include "RenderHelper.h"
+#include "../Waypoint/WaypointManager.h"
 
 CEnemy::CEnemy()
 	: GenericEntity(NULL)
-	, defaultPosition(Vector3(0.0f, 0.0f, 0.0f))
+	, defaultPosition(Vector3(0.0f,0.0f,0.0f))
 	, defaultTarget(Vector3(0.0f, 0.0f, 0.0f))
 	, defaultUp(Vector3(0.0f, 0.0f, 0.0f))
 	, target(Vector3(0.0f, 0.0f, 0.0f))
@@ -13,7 +14,9 @@ CEnemy::CEnemy()
 	, maxBoundary(Vector3(0.0f, 0.0f, 0.0f))
 	, minBoundary(Vector3(0.0f, 0.0f, 0.0f))
 	, m_pTerrain(NULL)
+	, m_iWayPointIndex(-1)
 {
+	listOfWaypoints.clear();
 }
 
 
@@ -28,9 +31,22 @@ void CEnemy::Init(void)
 	defaultTarget.Set(0, 0, 0);
 	defaultUp.Set(0, 1, 0);
 
+	// Set up the waypoints
+	listOfWaypoints.push_back(0);
+	listOfWaypoints.push_back(1);
+	listOfWaypoints.push_back(2);
+
+	m_iWayPointIndex = 0;
+
 	// Set the current values
 	position.Set(10.0f, 0.0f, 0.0f);
-	target.Set(10.0f, 0.0f, 450.0f);
+	//target.Set(10.0f, 0.0f, 450.0f);
+	CWaypoint* nextWaypoint = GetNextWaypoint();
+	if (nextWaypoint)
+		target = nextWaypoint->GetPosition();
+	else
+		target = Vector3(0, 0, 0);
+	cout << "Next target: " << target << endl;
 	up.Set(0.0f, 1.0f, 0.0f);
 
 	// Set Boundary
@@ -38,14 +54,13 @@ void CEnemy::Init(void)
 	minBoundary.Set(-1, -1, -1);
 
 	// Set speed
-	m_dSpeed = 1.0;
+	m_dSpeed = 10.0;
 
 	// Initialise the LOD meshes
 	InitLOD("cube", "sphere", "cubeSG");
 
 	// Initialise the Collider
 	this->SetCollider(true);
-
 	this->SetAABB(Vector3(1, 1, 1), Vector3(-1, -1, -1));
 
 	// Add to EntityManager
@@ -117,6 +132,20 @@ GroundEntity* CEnemy::GetTerrain(void)
 	return m_pTerrain;
 }
 
+// Get next Waypoint for this CEnemy
+CWaypoint* CEnemy::GetNextWaypoint(void)
+{
+	if ((int)listOfWaypoints.size() > 0)
+	{
+		m_iWayPointIndex++;
+		if (m_iWayPointIndex >= (int)listOfWaypoints.size())
+			m_iWayPointIndex = 0;
+		return CWaypointManager::GetInstance()->GetWaypoint(listOfWaypoints[m_iWayPointIndex]);
+	}
+	else
+		return NULL;
+}
+
 // Update
 void CEnemy::Update(double dt)
 {
@@ -128,10 +157,22 @@ void CEnemy::Update(double dt)
 	Constrain();
 
 	// Update the target
+	/*
 	if (position.z > 400.0f)
-		target.z = position.z * -1;
+	target.z = position.z * -1;
 	else if (position.z < -400.0f)
-		target.z = position.z * -1;
+	target.z = position.z * -1;
+	*/
+
+	if ((target - position).LengthSquared() < 25.0f)
+	{
+		CWaypoint* nextWaypoint = GetNextWaypoint();
+		if (nextWaypoint)
+			target = nextWaypoint->GetPosition();
+		else
+			target = Vector3(0, 0, 0);
+		cout << "Next target: " << target << endl;
+	}
 }
 
 // Constrain the position within the borders

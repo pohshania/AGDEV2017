@@ -22,30 +22,35 @@
 #include "SkyBox/SkyBoxEntity.h"
 #include "SceneGraph\SceneGraph.h"
 #include "SpatialPartition\SpatialPartition.h"
+#include "Waypoint\WaypointManager.h"
+#include "../Lua/LuaInterface.h"
 #include "BlueRobo\BlueRoboSingle.h"
 #include "RedRobo\RedRoboSingle.h"
 
 #include <iostream>
 using namespace std;
 
-SceneText* SceneText::sInstance = new SceneText(SceneManager::GetInstance());
+//SceneText* SceneText::sInstance = new SceneText(SceneManager::GetInstance());
 
 SceneText::SceneText()
 {
 }
 
-SceneText::SceneText(SceneManager* _sceneMgr)
-{
-	_sceneMgr->AddScene("Start", this);
-}
+//SceneText::SceneText(SceneManager* _sceneMgr)
+//{
+//	_sceneMgr->AddScene("Start", this);
+//}
 
 SceneText::~SceneText()
 {
+	CWaypointManager::GetInstance()->DropInstance();
+	CSpatialPartition::GetInstance()->RemoveCamera();
 	CSceneGraph::GetInstance()->Destroy();
 }
 
 void SceneText::Init()
 {
+	/*
 	currProg = GraphicsManager::GetInstance()->LoadShader("default", "Shader//Texture.vertexshader", "Shader//Texture.fragmentshader");
 	
 	// Tell the shader program to store these uniform locations
@@ -88,6 +93,10 @@ void SceneText::Init()
 	// Tell the graphics manager to use the shader we just loaded
 	GraphicsManager::GetInstance()->SetActiveShader("default");
 
+	currProg->UpdateInt("numLights", 1);
+	currProg->UpdateInt("textEnabled", 0);
+	*/
+
 	lights[0] = new Light();
 	GraphicsManager::GetInstance()->AddLight("lights[0]", lights[0]);
 	lights[0]->type = Light::LIGHT_DIRECTIONAL;
@@ -111,9 +120,6 @@ void SceneText::Init()
 	lights[1]->power = 0.4f;
 	lights[1]->name = "lights[1]";
 
-	currProg->UpdateInt("numLights", 1);
-	currProg->UpdateInt("textEnabled", 0);
-	
 	// Create the playerinfo instance, which manages all information about the player
 	playerInfo = CPlayerInfo::GetInstance();
 	playerInfo->Init();
@@ -141,15 +147,14 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateCube("cube", Color(1.0f, 1.0f, 0.0f), 1.0f);
 	MeshBuilder::GetInstance()->GetMesh("cone")->material.kDiffuse.Set(0.99f, 0.99f, 0.99f);
 	MeshBuilder::GetInstance()->GetMesh("cone")->material.kSpecular.Set(0.f, 0.f, 0.f);
+	MeshBuilder::GetInstance()->GenerateCube("cubeSG", Color(1.0f, 0.64f, 0.0f), 1.0f);
 
 	// Ground
 	MeshBuilder::GetInstance()->GenerateQuad("GRASS_DARKGREEN", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GetMesh("GRASS_DARKGREEN")->textureID = LoadTGA("Image//SkyBox//skybox_bottom.tga");
 	MeshBuilder::GetInstance()->GenerateQuad("GEO_GRASS_LIGHTGREEN", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GetMesh("GEO_GRASS_LIGHTGREEN")->textureID = LoadTGA("Image//SkyBox//skybox_bottom.tga");
-	MeshBuilder::GetInstance()->GenerateCube("cubeSG", Color(1.0f, 0.64f, 0.0f), 1.0f);
 
-	// SkyBox
 	MeshBuilder::GetInstance()->GenerateQuad("SKYBOX_FRONT", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GenerateQuad("SKYBOX_BACK", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GenerateQuad("SKYBOX_LEFT", Color(1, 1, 1), 1.f);
@@ -162,18 +167,12 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GetMesh("SKYBOX_RIGHT")->textureID = LoadTGA("Image//SkyBox//skybox_right.tga");
 	MeshBuilder::GetInstance()->GetMesh("SKYBOX_TOP")->textureID = LoadTGA("Image//SkyBox//skybox_top.tga");
 	MeshBuilder::GetInstance()->GetMesh("SKYBOX_BOTTOM")->textureID = LoadTGA("Image//SkyBox//skybox_bottom.tga");
-
-	// Laser
 	MeshBuilder::GetInstance()->GenerateRay("laser", 10.0f);
 	MeshBuilder::GetInstance()->GenerateQuad("GRIDMESH", Color(1, 1, 1), 10.f);
 
-	// Enemy Base
-	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBase", "OBJ//Enemy//EnemyBase.obj");
-	MeshBuilder::GetInstance()->GetMesh("EnemyBase")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBasePart1", "OBJ//Enemy//EnemyBasePart1.obj");
-	MeshBuilder::GetInstance()->GetMesh("EnemyBasePart1")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
-	MeshBuilder::GetInstance()->GenerateOBJ("EnemyBasePart2", "OBJ//Enemy//EnemyBasePart2.obj");
-	MeshBuilder::GetInstance()->GetMesh("EnemyBasePart2")->textureID = LoadTGA("Image//Enemy//EnemyBase.tga");
+	// Bullet
+	MeshBuilder::GetInstance()->GenerateOBJ("Bullet", "OBJ//bullet.obj");
+	MeshBuilder::GetInstance()->GetMesh("Bullet")->textureID = LoadTGA("Image//bullet.tga");
 
 	// Blue Robo
 	MeshBuilder::GetInstance()->GenerateOBJ("BlueRobo", "OBJ//Enemy//BlueRobo.obj");
@@ -193,167 +192,110 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GenerateOBJ("RedRoboBottom", "OBJ//Enemy//RedRoboBottom.obj");
 	MeshBuilder::GetInstance()->GetMesh("RedRoboBottom")->textureID = LoadTGA("Image//Enemy//RedRobo.tga");
 
-	// Bullet
-	MeshBuilder::GetInstance()->GenerateOBJ("Bullet", "OBJ//bullet.obj");
-	MeshBuilder::GetInstance()->GetMesh("Bullet")->textureID = LoadTGA("Image//bullet.tga");
+	// Grids Highlights
+	MeshBuilder::GetInstance()->GenerateQuad("PlayerHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("PlayerHighlight")->textureID = LoadTGA("Image//PlayerHighlight.tga");
+	MeshBuilder::GetInstance()->GenerateQuad("BlueHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("BlueHighlight")->textureID = LoadTGA("Image//BlueHighlight.tga");
+	MeshBuilder::GetInstance()->GenerateQuad("RedHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("RedHighlight")->textureID = LoadTGA("Image//RedHighlight.tga");
 
-	// Spaceship
-	MeshBuilder::GetInstance()->GenerateOBJ("Spaceship", "OBJ//spaceship.obj");
-	MeshBuilder::GetInstance()->GetMesh("Spaceship")->textureID = LoadTGA("Image//spaceship.tga");
 
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
 	CSpatialPartition::GetInstance()->SetMesh("GRIDMESH");
-
-	// LOD
 	CSpatialPartition::GetInstance()->SetCamera(&camera);
 	CSpatialPartition::GetInstance()->SetLevelOfDetails(40000.0f, 160000.0f);
-
 	EntityManager::GetInstance()->SetSpatialPartition(CSpatialPartition::GetInstance());
 
-	MeshBuilder::GetInstance()->GenerateQuad("PlayerHighlight", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("PlayerHighlight")->textureID = LoadTGA("Image//PlayerHighlight.tga");
-
-	MeshBuilder::GetInstance()->GenerateQuad("BlueHighlight", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("BlueHighlight")->textureID = LoadTGA("Image//BlueHighlight.tga");
-
-	MeshBuilder::GetInstance()->GenerateQuad("RedHighlight", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("RedHighlight")->textureID = LoadTGA("Image//RedHighlight.tga");
-
 	// Create entities into the scene
-	//Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
-	//Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
+	Create::Entity("reference", Vector3(0.0f, 0.0f, 0.0f)); // Reference
+	Create::Entity("lightball", Vector3(lights[0]->position.x, lights[0]->position.y, lights[0]->position.z)); // Lightball
 
-	//GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f));
-	//aCube->SetCollider(true);
-	//aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	//aCube->InitLOD("cube", "sphere", "cubeSG");
+	GenericEntity* aCube = Create::Entity("cube", Vector3(-20.0f, 0.0f, -20.0f));
+	aCube->SetCollider(true);
+	aCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	aCube->InitLOD("cube", "sphere", "cubeSG");
 
-	//// Add the pointer to this new entity to the Scene Graph
-	//CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
-	//if (theNode == NULL)
-	//{
-	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	//}
+	// Add the pointer to this new entity to the Scene Graph
+	CSceneNode* theNode = CSceneGraph::GetInstance()->AddNode(aCube);
+	if (theNode == NULL)
+	{
+		cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
+	}
 
-	//GenericEntity* anotherCube = Create::Entity("cube", Vector3(-20.0f, 5.0f, -20.0f));
-	//anotherCube->SetCollider(true);
-	//anotherCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	//CSceneNode* anotherNode = theNode->AddChild(anotherCube);
-	//if (anotherNode == NULL)
-	//{
-	//	cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
-	//}
+	GenericEntity* anotherCube = Create::Entity("cube", Vector3(-20.0f, 1.1f, -20.0f));
+	anotherCube->SetCollider(true);
+	anotherCube->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+	CSceneNode* anotherNode = theNode->AddChild(anotherCube);
+	if (anotherNode == NULL)
+	{
+		cout << "EntityManager::AddEntity: Unable to add to scene graph!" << endl;
+	}
+	
+	GenericEntity* baseCube = Create::Asset("cube", Vector3(0.0f, 0.0f, 0.0f));
+	CSceneNode* baseNode = CSceneGraph::GetInstance()->AddNode(baseCube);
 
+	CUpdateTransformation* baseMtx = new CUpdateTransformation();
+	baseMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
+	baseMtx->SetSteps(-60, 60);
+	baseNode->SetUpdateTransformation(baseMtx);
 
+	GenericEntity* childCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
+	CSceneNode* childNode = baseNode->AddChild(childCube);
+	childNode->ApplyTranslate(0.0f, 1.0f, 0.0f);
 
-	// BLUE ROBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBOBO !!@$@#%@#%
-	//GenericEntity* anotherCube2 = Create::Entity("BlueRoboHead", Vector3(0.0f, 4.0f, 50.0f));
-	//anotherCube2->SetCollider(true);
-	//anotherCube2->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	//GenericEntity* anotherCube3 = Create::Entity("BlueRoboBody", Vector3(0.0f, 0.0f, 50.0f));
-	//anotherCube3->SetCollider(true);
-	//anotherCube3->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	//GenericEntity* anotherCube4 = Create::Entity("BlueRoboLeftHand", Vector3(-2.35f, 0.0f, 50.0f));
-	//anotherCube4->SetCollider(true);
-	//anotherCube4->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
-	//GenericEntity* anotherCube5 = Create::Entity("BlueRoboRightHand", Vector3(2.35f, 0.0f, 50.0f));
-	//anotherCube5->SetCollider(true);
-	//anotherCube5->SetAABB(Vector3(1.0f, 1.0f, 1.0f), Vector3(-1.0f, -1.0f, -1.0f));
+	GenericEntity* grandchildCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
+	CSceneNode* grandchildNode = childNode->AddChild(grandchildCube);
+	grandchildNode->ApplyTranslate(0.0f, 0.0f, 1.0f);
+	CUpdateTransformation* aRotateMtx = new CUpdateTransformation();
+	aRotateMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
+	aRotateMtx->SetSteps(-120, 60);
+	grandchildNode->SetUpdateTransformation(aRotateMtx);
+	
+	// Create a Waypoint inside WaypointManager
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_1");
+	int aWayPoint = CWaypointManager::GetInstance()->AddWaypoint(Vector3(	CLuaInterface::GetInstance()->GetField("x"),
+																			CLuaInterface::GetInstance()->GetField("y"),
+																			CLuaInterface::GetInstance()->GetField("z")));
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_2");
+	int anotherWaypoint = CWaypointManager::GetInstance()->AddWaypoint(aWayPoint, Vector3(	CLuaInterface::GetInstance()->GetField("x"),
+																							CLuaInterface::GetInstance()->GetField("y"),
+																							CLuaInterface::GetInstance()->GetField("z")));
+	lua_getglobal(CLuaInterface::GetInstance()->theLuaState, "Waypoint_A_3");
+	CWaypointManager::GetInstance()->AddWaypoint(anotherWaypoint, Vector3(CLuaInterface::GetInstance()->GetField("x"),
+																			CLuaInterface::GetInstance()->GetField("y"),
+																			CLuaInterface::GetInstance()->GetField("z")));
+	CWaypointManager::GetInstance()->PrintSelf();
 
-	// Transform stuff
-	//GenericEntity* baseCube = Create::Asset("cube", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* baseNode = CSceneGraph::GetInstance()->AddNode(baseCube);
+	//// Blue Robo
+	//blueRobo1 = new CBlueRobo();
+	//blueRobo1->Init(40, -2.4, -65);
+	//BlueRoboSingleton::GetInstance()->BlueRobos.push_back(blueRobo1);
 
-	//CUpdateTransformation* baseMtx = new CUpdateTransformation();
-	//baseMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	//baseMtx->SetSteps(-60, 60);
-	//baseNode->SetUpdateTransformation(baseMtx);
+	//// Red Robo
+	//redRobo1 = new CRedRobo();
+	//redRobo1->Init(-40, -2.5, -65);
+	//RedRoboSingleton::GetInstance()->RedRobos.push_back(redRobo1);
 
-	//GenericEntity* childCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* childNode = baseNode->AddChild(childCube);
-	//childNode->ApplyTranslate(0.0f, 1.0f, 0.0f);
+	// Create a CEnemy instance
+	theEnemy = new CEnemy();
+	theEnemy->Init();
 
-	//GenericEntity* grandchildCube = Create::Asset("cubeSG", Vector3(0.0f, 0.0f, 0.0f));
-	//CSceneNode* grandchildNode = childNode->AddChild(grandchildCube);
-	//grandchildNode->ApplyTranslate(0.0f, 0.0f, 1.0f);
-	//CUpdateTransformation* aRotateMtx = new CUpdateTransformation();
-	//aRotateMtx->ApplyUpdate(1.0f, 0.0f, 0.0f, 1.0f);
-	//aRotateMtx->SetSteps(-120, 60);
-	//grandchildNode->SetUpdateTransformation(aRotateMtx);
-
-	// Creating enemy instances
-	//theEnemy = new CEnemy();
-	//theEnemy->Init();
-
-	blueRobo1 = new CBlueRobo();
-	blueRobo1->Init(40, -2.4, -65);
-	BlueRoboSingleton::GetInstance()->BlueRobos.push_back(blueRobo1);
-
-	redRobo1 = new CRedRobo();
-	redRobo1->Init(-40, -2.5, -65);
-	RedRoboSingleton::GetInstance()->RedRobos.push_back(redRobo1);
-
-
-	// Enemy Base
-	GenericEntity* EnemyBase = Create::Asset("EnemyBase", Vector3(0.0f, 44.5f, -300.0f));
-	EnemyBase->SetScale(Vector3(3, 3, 3));
-	EnemyBase->SetCollider(true);
-	EnemyBase->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	EnemyBase->InitLOD("EnemyBase", "EnemyBase", "cubeSG");
-	CSceneNode* EnemyBaseNode = CSceneGraph::GetInstance()->AddNode(EnemyBase) ;
-
-	GenericEntity* EnemyBasePart1 = Create::Asset("EnemyBasePart1", Vector3(0.0f, 44.5f, -300.0f));
-	EnemyBasePart1->SetScale(Vector3(3, 3, 3));
-	EnemyBasePart1->SetCollider(true);
-	EnemyBasePart1->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	EnemyBasePart1->InitLOD("EnemyBasePart1", "EnemyBasePart1", "cubeSG");
-	CSceneNode* EnemyBasePart1Node = EnemyBaseNode->AddChild(EnemyBasePart1);
-
-	CUpdateTransformation* basePart1 = new CUpdateTransformation();
-	basePart1->ApplyUpdate(0.0f, 0.1f, 0.0f);
-	basePart1->SetSteps(-40, 40);
-	EnemyBasePart1Node->SetUpdateTransformation(basePart1);
-
-	GenericEntity* EnemyBasePart2 = Create::Asset("EnemyBasePart2", Vector3(0.0f, 44.5f, -300.0f));
-	EnemyBasePart2->SetScale(Vector3(3, 3, 3));
-	EnemyBasePart2->SetCollider(true);
-	EnemyBasePart2->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
-	EnemyBasePart2->InitLOD("EnemyBasePart2", "EnemyBasePart2", "cubeSG");
-	CSceneNode* EnemyBasePart2Node = EnemyBaseNode->AddChild(EnemyBasePart2);
-
-	CUpdateTransformation* basePart2 = new CUpdateTransformation();
-	basePart2->ApplyUpdate(0.0f, 0.1f, 0.0f);
-	basePart2->SetSteps(-40, 40);
-	EnemyBasePart2Node->SetUpdateTransformation(basePart2);
-
-	// Spaceship
-	GenericEntity* Spaceship = Create::Entity("Spaceship", Vector3(50.0f, 20.0f, 0.0f));
-	Spaceship->SetScale(Vector3(6, 6, 6));
-	Spaceship->SetCollider(true);
-	Spaceship->SetAABB(Vector3(6.f, 6.f, 6.f), Vector3(-6.f, -6.f, -6.f));
-	Spaceship->InitLOD("Spaceship", "sphere", "cube");
-
-	// Create ground
 	groundEntity = Create::Ground("GRASS_DARKGREEN", "GEO_GRASS_LIGHTGREEN");
+    //	Create::Text3DObject("text", Vector3(0.0f, 0.0f, 0.0f), "DM2210", Vector3(10.0f, 10.0f, 10.0f), Color(0, 1, 1));
+	Create::Sprite2DObject("crosshair", Vector3(0.0f, 0.0f, 0.0f), Vector3(10.0f, 10.0f, 10.0f));
 
-    // Create::Text3DObject("text", Vector3(0.0f, 0.0f, 0.0f), "DM2210", Vector3(10.0f, 10.0f, 10.0f), Color(0, 1, 1));
-
-	// Create cross hair
-	Create::Sprite2DObject("crosshair", Vector3(0.0f, 0.0f, 0.0f), Vector3(20.0f, 20.0f, 20.0f));
-
-	// Create skybox
 	SkyBoxEntity* theSkyBox = Create::SkyBox("SKYBOX_FRONT", "SKYBOX_BACK",
 											 "SKYBOX_LEFT", "SKYBOX_RIGHT",
 											 "SKYBOX_TOP", "SKYBOX_BOTTOM");
 
 	// Customise the ground entity
 	groundEntity->SetPosition(Vector3(0, -10, 0));
-	groundEntity->SetScale(Vector3(80.0f, 80.0f, 80.0f));
+	groundEntity->SetScale(Vector3(100.0f, 100.0f, 100.0f));
 	groundEntity->SetGrids(Vector3(10.0f, 1.0f, 10.0f));
 	playerInfo->SetTerrain(groundEntity);
-	//theEnemy->SetTerrain(groundEntity);
-	//blueRobo1->SetTerrain(groundEntity);
+	theEnemy->SetTerrain(groundEntity);
 
 	// Setup the 2D entities
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
@@ -461,8 +403,6 @@ void SceneText::Update(double dt)
 	ss1.precision(4);
 	ss1 << "Player:" << playerInfo->GetPos();
 	textObj[2]->SetText(ss1.str());
-	
-	//cout << blueRobo1->GetPosition();
 }
 
 void SceneText::Render()

@@ -32,16 +32,25 @@
       <UniqueIdentifier>{802e439a-6b63-421f-9bce-337a839a36c4}</UniqueIdentifier>
     </Filter>
     <Filter Include="LevelOfDetails">
-      <UniqueIdentifier>{2765d7f8-1dce-4fbd-9b6a-073ad5188fa8}</UniqueIdentifier>
+      <UniqueIdentifier>{3f38a962-a883-4f37-9a91-6979b4fc1f88}</UniqueIdentifier>
     </Filter>
     <Filter Include="Enemy">
-      <UniqueIdentifier>{cbc84f3c-d549-4814-9c2b-8a0cca9e982f}</UniqueIdentifier>
+      <UniqueIdentifier>{f5fb02ce-b59a-403f-b90f-1e6eba658755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Waypoint">
+      <UniqueIdentifier>{cefb8874-96bd-4356-bec8-84091096971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameStateManagement">
+      <UniqueIdentifier>{b1606fe2-5ef2-4cdd-baea-061dd29daa02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{ce679d6f-cdf4-4922-bc28-c951603c2237}</UniqueIdentifier>
     </Filter>
     <Filter Include="BlueRobo">
-      <UniqueIdentifier>{011657a4-d1ed-44f9-89be-72db0ee54cbe}</UniqueIdentifier>
+      <UniqueIdentifier>{65e7f480-c03d-4444-bbf9-1abe50f17899}</UniqueIdentifier>
     </Filter>
     <Filter Include="RedRobo">
-      <UniqueIdentifier>{ff6259e7-c01f-46eb-9ed4-43b59c62fc3e}</UniqueIdentifier>
+      <UniqueIdentifier>{1c9c3b3a-4016-47e4-8501-a68b94ada908}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,26 +138,44 @@
     <ClCompile Include="Source\Enemy\Enemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BlueRobo\BlueRobo.cpp">
-      <Filter>BlueRobo</Filter>
+    <ClCompile Include="Source\Waypoint\Waypoint.cpp">
+      <Filter>Waypoint</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BlueRobo\BlueRoboHead.cpp">
+    <ClCompile Include="Source\Waypoint\WaypointManager.cpp">
+      <Filter>Waypoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameStateManagement\IntroState.cpp">
+      <Filter>GameStateManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameStateManagement\MenuState.cpp">
+      <Filter>GameStateManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Lua\LuaInterface.cpp">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRobo.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
     <ClCompile Include="Source\BlueRobo\BlueRoboBottom.cpp">
       <Filter>BlueRobo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RedRobo\RedRobo.cpp">
-      <Filter>RedRobo</Filter>
+    <ClCompile Include="Source\BlueRobo\BlueRoboHead.cpp">
+      <Filter>BlueRobo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RedRobo\RedRoboHead.cpp">
+    <ClCompile Include="Source\BlueRobo\BlueRoboPart.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BlueRobo\BlueRoboSingle.cpp">
+      <Filter>BlueRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RedRobo\RedRobo.cpp">
       <Filter>RedRobo</Filter>
     </ClCompile>
     <ClCompile Include="Source\RedRobo\RedRoboBottom.cpp">
       <Filter>RedRobo</Filter>
     </ClCompile>
-    <ClCompile Include="Source\BlueRobo\BlueRoboSingle.cpp">
-      <Filter>BlueRobo</Filter>
+    <ClCompile Include="Source\RedRobo\RedRoboHead.cpp">
+      <Filter>RedRobo</Filter>
     </ClCompile>
     <ClCompile Include="Source\RedRobo\RedRoboSingle.cpp">
       <Filter>RedRobo</Filter>
@@ -236,26 +263,59 @@
     <ClInclude Include="Source\Enemy\Enemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BlueRobo\BlueRobo.h">
-      <Filter>BlueRobo</Filter>
+    <ClInclude Include="Source\Waypoint\Waypoint.h">
+      <Filter>Waypoint</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BlueRobo\BlueRoboHead.h">
+    <ClInclude Include="Source\Waypoint\WaypointManager.h">
+      <Filter>Waypoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManagement\IntroState.h">
+      <Filter>GameStateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManagement\MenuState.h">
+      <Filter>GameStateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lua\lauxlib.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lua\lua.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lua\lua.hpp">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lua\luaconf.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lua\lualib.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Lua\LuaInterface.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRobo.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
     <ClInclude Include="Source\BlueRobo\BlueRoboBottom.h">
       <Filter>BlueRobo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RedRobo\RedRobo.h">
-      <Filter>RedRobo</Filter>
+    <ClInclude Include="Source\BlueRobo\BlueRoboHead.h">
+      <Filter>BlueRobo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\RedRobo\RedRoboHead.h">
+    <ClInclude Include="Source\BlueRobo\BlueRoboPart.h">
+      <Filter>BlueRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BlueRobo\BlueRoboSingle.h">
+      <Filter>BlueRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RedRobo\RedRobo.h">
       <Filter>RedRobo</Filter>
     </ClInclude>
     <ClInclude Include="Source\RedRobo\RedRoboBottom.h">
       <Filter>RedRobo</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BlueRobo\BlueRoboSingle.h">
-      <Filter>BlueRobo</Filter>
+    <ClInclude Include="Source\RedRobo\RedRoboHead.h">
+      <Filter>RedRobo</Filter>
     </ClInclude>
     <ClInclude Include="Source\RedRobo\RedRoboSingle.h">
       <Filter>RedRobo</Filter>
