@@ -5,6 +5,7 @@
 
 class Mesh;
 class CPlayerInfo;
+class CEnemy;
 
 class CProjectile : public EntityBase, public CCollider
 {
@@ -35,6 +36,7 @@ public:
 	float GetSpeed(void) const;
 	// Set the source of the projectile
 	void SetSource(CPlayerInfo* _source);
+	void SetSource(CEnemy* _source);
 	// Get the source of the projectile
 	CPlayerInfo* GetSource(void) const;
 
@@ -55,6 +57,7 @@ protected:
 	Vector3 theDirection;
 	// The character which fired this projectile
 	CPlayerInfo* theSource;
+	CEnemy* theSource2;
 };
 
 namespace Create
@@ -65,5 +68,12 @@ namespace Create
 							const float m_fLifetime, 
 							const float m_fSpeed,
 							CPlayerInfo* _source=NULL);
+
+	CProjectile* Projectile(const std::string& _meshName,
+		const Vector3& _position,
+		const Vector3& _direction,
+		const float m_fLifetime,
+		const float m_fSpeed,
+		CEnemy* _source = NULL);
 };
 

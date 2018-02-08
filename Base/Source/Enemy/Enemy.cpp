@@ -4,6 +4,7 @@
 #include "RenderHelper.h"
 #include "../Waypoint/WaypointManager.h"
 #include "MeshBuilder.h"
+#include "../Projectile/Projectile.h"
 //#include "EnemyChase.h"
 //#include "EnemyPatrol.h"
 
@@ -76,7 +77,7 @@ void CEnemy::Init(void)
 	// Initialise the Collider
 	this->SetCollider(true);
 	this->SetAABB(Vector3(1, 1, 1), Vector3(-1, -1, -1));
-	this->SetScale(Vector3(2.5, 2.5, 2.5));
+	this->SetScale(Vector3(3, 3, 3));
 
 	// Add to EntityManager
 	EntityManager::GetInstance()->AddEntity(this, true);
@@ -147,7 +148,6 @@ void CEnemy::ChaseState()
 // red
 void CEnemy::AttackState()
 {
-
 	//// attack -> return
 	//if ((GetPos().x - CPlayerInfo::GetInstance()->GetPos().x) > 50.0f)
 	//{
@@ -160,6 +160,7 @@ void CEnemy::AttackState()
 		_currState = E_CHASE;
 	}
 
+	
 }
 
 // blue
@@ -178,7 +179,6 @@ void CEnemy::ReturnState()
 		// return -> patrol
 		_currState = E_PATROL;
 	}
-
 }
 
 // Reset this player instance to default

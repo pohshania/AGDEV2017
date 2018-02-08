@@ -164,6 +164,34 @@ void CWeaponInfo::Discharge(Vector3 position, Vector3 target, CPlayerInfo* _sour
 	}
 }
 
+// discharge this for enemy
+void CWeaponInfo::Discharge(Vector3 position, Vector3 target, CEnemy* _source2)
+{
+	if (bFire)
+	{
+		// If there is still ammo in the magazine, then fire
+		if (magRounds > 0)
+		{
+			// Create a projectile with a cube mesh. Its position and direction is same as the player.
+			// It will last for 3.0 seconds and travel at 500 units per second
+			CProjectile* aProjectile = Create::Projectile("Bullet",
+				position,
+				(target - position).Normalized(),
+				2.0f,
+				50.0f,
+				_source2);
+			aProjectile->SetCollider(true);
+			aProjectile->SetAABB(Vector3(0.5f, 0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f));
+			bFire = false;
+			magRounds--;
+		}
+	}
+	else
+	{
+		int a = 0;
+	}
+}
+
 // Reload this weapon
 void CWeaponInfo::Reload(void)
 {

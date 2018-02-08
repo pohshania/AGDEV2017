@@ -1,6 +1,7 @@
 #include "SceneText.h"
 #include "GL\glew.h"
 
+#include "RenderHelper.h"
 #include "shader.hpp"
 #include "MeshBuilder.h"
 #include "Application.h"
@@ -435,6 +436,13 @@ void SceneText::Render()
 	GraphicsManager::GetInstance()->SetOrthographicProjection(-halfWindowWidth, halfWindowWidth, -halfWindowHeight, halfWindowHeight, -10, 10);
 	GraphicsManager::GetInstance()->DetachCamera();
 	EntityManager::GetInstance()->RenderUI();
+
+	MS& modelStack = GraphicsManager::GetInstance()->GetModelStack();
+	modelStack.PushMatrix();
+	modelStack.Scale(10, 10, 10);
+	modelStack.Translate(0.5, -0.5, 0);
+	RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("EnemyAttack"));
+	modelStack.PopMatrix();
 }
 
 void SceneText::Exit()

@@ -41,14 +41,16 @@ void CMenuState::Init()
 
 	cout << "CMenuState loaded\n" << endl;
 }
+
 void CMenuState::Update(double dt)
 {
 	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
 	{
 		cout << "Loading CMenuState" << endl;
-		SceneManager::GetInstance()->SetActiveScene("GameState");
+		SceneManager::GetInstance()->SetActiveScene("InstructionsState");
 	}
 }
+
 void CMenuState::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -73,6 +75,7 @@ void CMenuState::Render()
 	// Render the required entities
 	EntityManager::GetInstance()->RenderUI();
 }
+
 void CMenuState::Exit()
 {
 	// Remove the entity from EntityManager

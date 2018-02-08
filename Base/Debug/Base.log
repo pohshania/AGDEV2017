@@ -1,5 +1,5 @@
-﻿  Enemy.cpp
+﻿  SceneText.cpp
 Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Base.vcxproj -> C:\Users\Shania\Desktop\NYP_Framework_SOLUTION\Debug\Base.exe
-  Base.vcxproj -> C:\Users\Shania\Desktop\NYP_Framework_SOLUTION\Debug\Base.pdb (Full PDB)
+  Base.vcxproj -> C:\Users\Shania\Desktop\AGDEV2017\Debug\Base.exe
+  Base.vcxproj -> C:\Users\Shania\Desktop\AGDEV2017\Debug\Base.pdb (Full PDB)

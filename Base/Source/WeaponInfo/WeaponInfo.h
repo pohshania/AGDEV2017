@@ -3,6 +3,7 @@
 #include "Vector3.h"
 
 class CPlayerInfo;
+class CEnemy;
 
 class CWeaponInfo
 {
@@ -64,6 +65,8 @@ public:
 	virtual void Update(const double dt);
 	// Discharge this weapon
 	virtual void Discharge(Vector3 position, Vector3 target, CPlayerInfo* _source = NULL);
+	// Discharge this weapon for enemy
+	virtual void Discharge(Vector3 position, Vector3 target, CEnemy* _source2 = NULL);
 	// Reload this weapon
 	void Reload(void);
 	// Add rounds

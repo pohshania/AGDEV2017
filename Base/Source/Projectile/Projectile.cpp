@@ -22,6 +22,7 @@ CProjectile::CProjectile(Mesh* _modelMesh)
 	, m_fLifetime(-1)
 	, m_fSpeed(10.0f)
 	, theSource(NULL)
+	, theSource2(NULL)
 {
 }
 
@@ -29,6 +30,7 @@ CProjectile::~CProjectile(void)
 {
 	modelMesh = NULL;
 	theSource = NULL;
+	theSource2 = NULL;
 }
 
 // Activate the projectile. true == active, false == inactive
@@ -96,6 +98,12 @@ void CProjectile::SetSource(CPlayerInfo* _source)
 	theSource = _source;
 }
 
+// Set the source of the projectile
+void CProjectile::SetSource(CEnemy* _source)
+{
+	theSource2 = _source;
+}
+
 // Get the source of the projectile
 CPlayerInfo* CProjectile::GetSource(void) const
 {
@@ -148,6 +156,28 @@ CProjectile* Create::Projectile(const std::string& _meshName,
 								const float m_fLifetime, 
 								const float m_fSpeed,
 								CPlayerInfo* _source)
+{
+	Mesh* modelMesh = MeshBuilder::GetInstance()->GetMesh(_meshName);
+	if (modelMesh == nullptr)
+		return nullptr;
+
+	CProjectile* result = new CProjectile(modelMesh);
+	result->Set(_position, _direction, m_fLifetime, m_fSpeed);
+	result->SetStatus(true);
+	result->SetCollider(true);
+	result->SetSource(_source);
+	EntityManager::GetInstance()->AddEntity(result);
+
+	return result;
+}
+
+// Create a projectile and add it into EntityManager
+CProjectile* Create::Projectile(const std::string& _meshName,
+	const Vector3& _position,
+	const Vector3& _direction,
+	const float m_fLifetime,
+	const float m_fSpeed,
+	CEnemy* _source)
 {
 	Mesh* modelMesh = MeshBuilder::GetInstance()->GetMesh(_meshName);
 	if (modelMesh == nullptr)

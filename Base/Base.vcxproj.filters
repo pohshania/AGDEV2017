@@ -195,6 +195,9 @@
     <ClCompile Include="Source\Enemy\EnemyPatrol.cpp">
       <Filter>Enemy\Enemy States</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameStateManagement\Instructions.cpp">
+      <Filter>GameStateManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy\EnemyPatrol.h">
       <Filter>Enemy\Enemy States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManagement\Instructions.h">
+      <Filter>GameStateManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,8 +4,6 @@
 #include "../Waypoint/Waypoint.h"
 #include "../PlayerInfo/PlayerInfo.h"
 
-#include <vector>
-
 using namespace std;
 
 class Mesh;
@@ -38,7 +36,6 @@ protected:
 	ENEMY_STATES _currState;
 	float directionVecX, directionVecZ, offset;
 	bool reached;
-
 public:
 	CEnemy(void);
 	virtual ~CEnemy();
