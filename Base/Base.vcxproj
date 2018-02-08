@@ -18,6 +18,10 @@
     <ClCompile Include="Source\BlueRobo\BlueRoboPart.cpp" />
     <ClCompile Include="Source\BlueRobo\BlueRoboSingle.cpp" />
     <ClCompile Include="Source\Enemy\Enemy.cpp" />
+    <ClCompile Include="Source\Enemy\EnemyChase.cpp" />
+    <ClCompile Include="Source\Enemy\EnemyPatrol.cpp" />
+    <ClCompile Include="Source\Enemy\EnemySingleton.cpp" />
+    <ClCompile Include="Source\Enemy\EnemyStatesBase.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FPSCamera.cpp" />
     <ClCompile Include="Source\GameStateManagement\IntroState.cpp" />
@@ -62,6 +66,10 @@
     <ClInclude Include="Source\BlueRobo\BlueRoboPart.h" />
     <ClInclude Include="Source\BlueRobo\BlueRoboSingle.h" />
     <ClInclude Include="Source\Enemy\Enemy.h" />
+    <ClInclude Include="Source\Enemy\EnemyChase.h" />
+    <ClInclude Include="Source\Enemy\EnemyPatrol.h" />
+    <ClInclude Include="Source\Enemy\EnemySingleton.h" />
+    <ClInclude Include="Source\Enemy\EnemyStatesBase.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FPSCamera.h" />
     <ClInclude Include="Source\GameStateManagement\IntroState.h" />

@@ -3,10 +3,10 @@
 #include "EntityBase.h"
 #include "Vector3.h"
 #include <vector>
-
 #include "MatrixStack.h"
 #include "GraphicsManager.h"
 using namespace std;
+
 
 //Include GLEW
 #include <GL/glew.h>

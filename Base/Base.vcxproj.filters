@@ -52,6 +52,9 @@
     <Filter Include="RedRobo">
       <UniqueIdentifier>{1c9c3b3a-4016-47e4-8501-a68b94ada908}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Enemy States">
+      <UniqueIdentifier>{fc0e9385-4a20-47d6-8784-de2c422f1601}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -179,6 +182,18 @@
     </ClCompile>
     <ClCompile Include="Source\RedRobo\RedRoboSingle.cpp">
       <Filter>RedRobo</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\EnemySingleton.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\EnemyChase.cpp">
+      <Filter>Enemy\Enemy States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\EnemyStatesBase.cpp">
+      <Filter>Enemy\Enemy States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\EnemyPatrol.cpp">
+      <Filter>Enemy\Enemy States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,6 +334,18 @@
     </ClInclude>
     <ClInclude Include="Source\RedRobo\RedRoboSingle.h">
       <Filter>RedRobo</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\EnemySingleton.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\EnemyChase.h">
+      <Filter>Enemy\Enemy States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\EnemyStatesBase.h">
+      <Filter>Enemy\Enemy States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\EnemyPatrol.h">
+      <Filter>Enemy\Enemy States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

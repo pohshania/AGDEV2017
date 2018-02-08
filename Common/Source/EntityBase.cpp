@@ -23,6 +23,7 @@ void EntityBase::Render()
 
 void EntityBase::RenderUI()
 {
+	
 }
 
 bool EntityBase::IsDone()

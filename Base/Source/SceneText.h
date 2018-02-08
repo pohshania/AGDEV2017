@@ -10,7 +10,6 @@
 #include "MatrixStack.h"
 #include "GenericEntity.h"
 #include "SceneGraph/UpdateTransformation.h"
-#include "LevelOfDetails\LevelOfDetails.h"
 #include "Enemy\Enemy.h"
 #include "BlueRobo\BlueRobo.h"
 #include "RedRobo\RedRobo.h"
@@ -31,7 +30,7 @@ public:
 	virtual void Exit();
 
 private:
-	SceneText(SceneManager* _sceneMgr); // This is used to register to SceneManager
+	//SceneText(SceneManager* _sceneMgr); // This is used to register to SceneManager
 
 	ShaderProgram* currProg;
 	CPlayerInfo* playerInfo;
@@ -41,12 +40,12 @@ private:
 	Light* lights[2];
 
 	GenericEntity* theCube;
-
 	CEnemy* theEnemy;
 	CBlueRobo* blueRobo1;
+	CBlueRobo* blueRobo2;
 	CRedRobo* redRobo1;
 
-	static SceneText* sInstance; // The pointer to the object that gets registered
+//	static SceneText* sInstance; // The pointer to the object that gets registered
 };
 
 #endif

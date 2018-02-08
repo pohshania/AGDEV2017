@@ -21,9 +21,9 @@ public:
 	CLevelOfDetails();
 	virtual ~CLevelOfDetails();
 
-	bool InitLOD(const std::string& _meshName_High,
-		const std::string& _meshName_Mid,
-		const std::string& _meshName_Low);
+	bool InitLOD(	const std::string& _meshName_High, 
+					const std::string& _meshName_Mid, 
+					const std::string& _meshName_Low);
 	bool DestroyLOD(void);
 
 	void SetLODStatus(const bool bActive);

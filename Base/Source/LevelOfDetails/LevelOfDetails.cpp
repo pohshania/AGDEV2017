@@ -2,8 +2,8 @@
 #include "MeshBuilder.h"
 
 /********************************************************************************
-Constructor
-********************************************************************************/
+ Constructor
+ ********************************************************************************/
 CLevelOfDetails::CLevelOfDetails()
 	: modelMesh_HighDetails(NULL)
 	, modelMesh_MidDetails(NULL)
@@ -14,8 +14,8 @@ CLevelOfDetails::CLevelOfDetails()
 }
 
 /********************************************************************************
-Destructor
-********************************************************************************/
+ Destructor
+ ********************************************************************************/
 CLevelOfDetails::~CLevelOfDetails()
 {
 	modelMesh_HighDetails = NULL;
@@ -24,11 +24,11 @@ CLevelOfDetails::~CLevelOfDetails()
 }
 
 /********************************************************************************
-Initialise the LOD system
-********************************************************************************/
+ Initialise the LOD system
+ ********************************************************************************/
 bool CLevelOfDetails::InitLOD(const std::string& _meshName_High,
-	const std::string& _meshName_Mid,
-	const std::string& _meshName_Low)
+								const std::string& _meshName_Mid,
+								const std::string& _meshName_Low)
 {
 	// Retrieve the Meshes from MeshBuilder's library and assign to the 3 Mesh pointers
 	modelMesh_HighDetails = MeshBuilder::GetInstance()->GetMesh(_meshName_High);
@@ -36,7 +36,7 @@ bool CLevelOfDetails::InitLOD(const std::string& _meshName_High,
 	modelMesh_LowDetails = MeshBuilder::GetInstance()->GetMesh(_meshName_Low);
 
 	// If any of the mesh is not loaded, then return false and avoid setting the LOD to active
-	if ((modelMesh_HighDetails == nullptr) ||
+	if ((modelMesh_HighDetails == nullptr) || 
 		(modelMesh_MidDetails == nullptr) ||
 		(modelMesh_LowDetails == nullptr))
 		return false;
@@ -47,8 +47,8 @@ bool CLevelOfDetails::InitLOD(const std::string& _meshName_High,
 }
 
 /********************************************************************************
-Destroy the LOD system
-********************************************************************************/
+ Destroy the LOD system
+ ********************************************************************************/
 bool CLevelOfDetails::DestroyLOD(void)
 {
 	if (modelMesh_HighDetails)
@@ -70,24 +70,24 @@ bool CLevelOfDetails::DestroyLOD(void)
 }
 
 /********************************************************************************
-Set the status of the LOD
-********************************************************************************/
+ Set the status of the LOD
+ ********************************************************************************/
 void CLevelOfDetails::SetLODStatus(const bool bActive)
 {
 	m_bActive = bActive;
 }
 
 /********************************************************************************
-Get the LOD Status
-********************************************************************************/
+ Get the LOD Status
+ ********************************************************************************/
 bool CLevelOfDetails::GetLODStatus(void) const
 {
 	return m_bActive;
 }
 
 /********************************************************************************
-Set the Mesh for a specified detail level
-********************************************************************************/
+ Set the Mesh for a specified detail level
+ ********************************************************************************/
 bool CLevelOfDetails::SetLODMesh(Mesh* theMesh, const DETAIL_LEVEL theDetailLevel)
 {
 	if (theDetailLevel == HIGH_DETAILS)
@@ -103,8 +103,8 @@ bool CLevelOfDetails::SetLODMesh(Mesh* theMesh, const DETAIL_LEVEL theDetailLeve
 }
 
 /********************************************************************************
-Get the Mesh based on the current detail level
-********************************************************************************/
+ Get the Mesh based on the current detail level
+ ********************************************************************************/
 Mesh* CLevelOfDetails::GetLODMesh(void) const
 {
 	if (theDetailLevel == HIGH_DETAILS)
@@ -117,8 +117,8 @@ Mesh* CLevelOfDetails::GetLODMesh(void) const
 }
 
 /********************************************************************************
-Get the Mesh based on the specified detail level
-********************************************************************************/
+ Get the Mesh based on the specified detail level
+ ********************************************************************************/
 Mesh* CLevelOfDetails::GetLODMesh(const DETAIL_LEVEL theDetailLevel) const
 {
 	if (theDetailLevel == HIGH_DETAILS)
@@ -130,15 +130,15 @@ Mesh* CLevelOfDetails::GetLODMesh(const DETAIL_LEVEL theDetailLevel) const
 	return NULL;
 }
 /********************************************************************************
-Get the current detail level
-********************************************************************************/
+ Get the current detail level
+ ********************************************************************************/
 int CLevelOfDetails::GetDetailLevel(void) const
 {
 	return theDetailLevel;
 }
 /********************************************************************************
-Set the current detail level
-********************************************************************************/
+ Set the current detail level
+ ********************************************************************************/
 bool CLevelOfDetails::SetDetailLevel(const DETAIL_LEVEL theDetailLevel)
 {
 	if ((theDetailLevel >= NO_DETAILS) && (theDetailLevel < NUM_DETAIL_LEVEL))

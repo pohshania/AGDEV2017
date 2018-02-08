@@ -38,9 +38,9 @@ CGrid::~CGrid(void)
 /********************************************************************************
 Initialise this grid
 ********************************************************************************/
-void CGrid::Init(const int xIndex, const int zIndex,
-	const int xGridSize, const int zGridSize,
-	const float xOffset, const float zOffset)
+void CGrid::Init(	const int xIndex, const int zIndex,
+					const int xGridSize, const int zGridSize,
+					const float xOffset, const float zOffset)
 {
 	index.Set(xIndex, 0, zIndex);
 	size.Set(xGridSize, 0, zGridSize);
@@ -50,7 +50,7 @@ void CGrid::Init(const int xIndex, const int zIndex,
 }
 
 /********************************************************************************
-Set a particular grid's Mesh
+ Set a particular grid's Mesh
 ********************************************************************************/
 void CGrid::SetMesh(const std::string& _meshName)
 {
@@ -66,36 +66,25 @@ Update the grid
 ********************************************************************************/
 void CGrid::Update(vector<EntityBase*>* migrationList)
 {
-	// get the positions for all bluerobos
-	for (size_t i = 0; i < BlueRoboSingleton::GetInstance()->BlueRobos.size(); i++)
-	{
-		//cout << BlueRoboSingleton::GetInstance()->BlueRobos[i]->GetPosition();
-	}
-
-	// get the positions for all redrobos
-	for (size_t i = 0; i < RedRoboSingleton::GetInstance()->RedRobos.size(); i++)
-	{
-		//cout << RedRoboSingleton::GetInstance()->RedRobos[i]->GetPosition();
-	}
-
 	// Check each object to see if they are no longer in this grid
 	std::vector<EntityBase*>::iterator it;
 	it = ListOfObjects.begin();
 	while (it != ListOfObjects.end())
 	{
 		Vector3 position = (*it)->GetPosition();
-		if (((min.x < position.x) && (position.x >= max.x)) &&
-			((min.z < position.z) && (position.z >= max.z)))
+
+		if (((min.x <= position.x) && (position.x <= max.x)) &&
+			((min.z <= position.z) && (position.z <= max.z)))
+		{
+			// Move on otherwise
+			++it;
+		}
+		else
 		{
 			migrationList->push_back(*it);
 
 			// Remove from this Grid
 			it = ListOfObjects.erase(it);
-		}
-		else
-		{
-			// Move on otherwise
-			++it;
 		}
 	}
 }
@@ -176,15 +165,15 @@ void CGrid::Add(EntityBase* theObject)
 		if (ListOfObjects[i] == theObject)
 			return;
 	}
-	ListOfObjects.push_back(theObject);
+	ListOfObjects.push_back( theObject );
 }
 
 /********************************************************************************
-Remove but not delete object from this grid
+ Remove but not delete object from this grid
 ********************************************************************************/
 void CGrid::Remove(void)
 {
-	for (int i = 0; i < ListOfObjects.size(); i++)
+	for( int i = 0 ; i < ListOfObjects.size(); i++)
 	{
 		// Do not delete the objects as they are stored in EntityManager and will be deleted there.
 		//delete ListOfObjects[i];
@@ -194,7 +183,7 @@ void CGrid::Remove(void)
 }
 
 /********************************************************************************
-Remove but not delete an object from this grid
+ Remove but not delete an object from this grid
 ********************************************************************************/
 bool CGrid::Remove(EntityBase* theObject)
 {
@@ -219,7 +208,7 @@ bool CGrid::Remove(EntityBase* theObject)
 }
 
 /********************************************************************************
-Check if an object is in this grid
+ Check if an object is in this grid
 ********************************************************************************/
 bool CGrid::IsHere(EntityBase* theObject) const
 {
@@ -240,8 +229,8 @@ vector<EntityBase*> CGrid::GetListOfObject(void)
 }
 
 /********************************************************************************
-PrintSelf
-********************************************************************************/
+ PrintSelf
+ ********************************************************************************/
 void CGrid::PrintSelf()
 {
 	cout << "CGrid::PrintSelf()" << endl;
@@ -262,8 +251,8 @@ void CGrid::PrintSelf()
 }
 
 /********************************************************************************
-Set the Level of Detail for objects in this CGrid
-********************************************************************************/
+ Set the Level of Detail for objects in this CGrid
+ ********************************************************************************/
 void CGrid::SetDetailLevel(const CLevelOfDetails::DETAIL_LEVEL theDetailLevel)
 {
 	this->theDetailLevel = theDetailLevel;

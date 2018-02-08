@@ -3,6 +3,7 @@
 #include "Collider\Collider.h"
 #include "GraphicsManager.h"
 #include "RenderHelper.h"
+#include "../LevelOfDetails/LevelOfDetails.h"
 
 template <typename T> vector<T> concat(vector<T> &a, vector<T> &b) {
 	vector<T> ret = vector<T>();
@@ -115,17 +116,16 @@ Update the spatial partition
 ********************************************************************************/
 void CSpatialPartition::Update(void)
 {
-
 	for (int i = 0; i<xNumOfGrid; i++)
 	{
 		for (int j = 0; j < zNumOfGrid; j++)
 		{
 			theGrid[i*zNumOfGrid + j].Update(&MigrationList);
-
+			
 			// Check visibility
-			if (IsVisible(theCamera->GetCameraPos(),
-				theCamera->GetCameraTarget() - theCamera->GetCameraPos(),
-				i, j) == true)
+			if (IsVisible(	theCamera->GetCameraPos(), 
+							theCamera->GetCameraTarget() - theCamera->GetCameraPos(),
+							i, j) == true)
 			{
 				// Calculate LOD for this CGrid
 				float distance = CalculateDistanceSquare(&(theCamera->GetCameraPos()), i, j);
@@ -291,56 +291,8 @@ float CSpatialPartition::CalculateDistanceSquare(Vector3* theCameraPosition, con
 	float xDistance = (xGridSize*xIndex + (xGridSize >> 1) - (xSize >> 1)) - theCameraPosition->x;
 	float zDistance = (zGridSize*zIndex + (zGridSize >> 1) - (zSize >> 1)) - theCameraPosition->z;
 
-	return (float)(xDistance*xDistance + zDistance*zDistance);
+	return (float) ( xDistance*xDistance + zDistance*zDistance );
 }
-
-/********************************************************************************
-Set LOD distances
-********************************************************************************/
-void CSpatialPartition::SetLevelOfDetails(const float distance_High2Mid, const float distance_Mid2Low)
-{
-	LevelOfDetails_Distances[0] = distance_High2Mid;
-	LevelOfDetails_Distances[1] = distance_Mid2Low;
-}
-
-/********************************************************************************
-Check if a CGrid is visible to the camera
-********************************************************************************/
-bool CSpatialPartition::IsVisible(Vector3 theCameraPosition,
-	Vector3 theCameraDirection,
-	const int xIndex, const int zIndex)
-{
-	float xDistance = (xGridSize*xIndex + (xGridSize >> 1) - (xSize >> 1)) - theCameraPosition.x;
-	float zDistance = (zGridSize*zIndex + (zGridSize >> 1) - (zSize >> 1)) - theCameraPosition.z;
-	// If the camera is within the CGrid, then display by default
-	// Otherwise, the entity may not get displayed.
-	if (xDistance*xDistance + zDistance*zDistance < (xGridSize*xGridSize + zGridSize*zGridSize))
-		return true;
-	Vector3 gridCentre(xDistance, 0, zDistance);
-	if (theCameraDirection.Dot(gridCentre) < 0)
-	{
-		return false;
-	}
-	return true;
-}
-
-/********************************************************************************
-Store a camera pointer into this class
-********************************************************************************/
-void CSpatialPartition::SetCamera(FPSCamera* _cameraPtr)
-{
-	theCamera = _cameraPtr;
-}
-
-
-/********************************************************************************
-Remove the camera pointer from this class
-********************************************************************************/
-void CSpatialPartition::RemoveCamera(void)
-{
-	theCamera = nullptr;
-}
-
 
 /********************************************************************************
  PrintSelf
@@ -365,4 +317,50 @@ void CSpatialPartition::PrintSelf() const
 	else
 		cout << "theGrid : NULL" << endl;
 	cout << "******* End of CSpatialPartition::PrintSelf() **********************************" << endl;
+}
+
+/********************************************************************************
+ Store a camera pointer into this class
+********************************************************************************/
+void CSpatialPartition::SetCamera(FPSCamera* _cameraPtr)
+{
+	theCamera = _cameraPtr;
+}
+
+/********************************************************************************
+ Remove the camera pointer from this class
+********************************************************************************/
+void CSpatialPartition::RemoveCamera(void)
+{
+	theCamera = nullptr;
+}
+
+/********************************************************************************
+ Set LOD distances
+********************************************************************************/
+void CSpatialPartition::SetLevelOfDetails(const float distance_High2Mid, const float distance_Mid2Low)
+{
+	LevelOfDetails_Distances[0] = distance_High2Mid;
+	LevelOfDetails_Distances[1] = distance_Mid2Low;
+}
+
+/********************************************************************************
+ Check if a CGrid is visible to the camera
+********************************************************************************/
+bool CSpatialPartition::IsVisible(	Vector3 theCameraPosition, 
+									Vector3 theCameraDirection, 
+									const int xIndex, const int zIndex)
+{
+	float xDistance = (xGridSize*xIndex + (xGridSize >> 1) - (xSize >> 1)) - theCameraPosition.x;
+	float zDistance = (zGridSize*zIndex + (zGridSize >> 1) - (zSize >> 1)) - theCameraPosition.z;
+	// If the camera is within the CGrid, then display by default
+	// Otherwise, the entity may not get displayed.
+	if (xDistance*xDistance + zDistance*zDistance < (xGridSize*xGridSize + zGridSize*zGridSize))
+		return true;
+	Vector3 gridCentre(xDistance, 0, zDistance);
+	if (theCameraDirection.Dot(gridCentre) < 0)
+	{
+		return false;
+	}
+	return true;
 }

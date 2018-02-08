@@ -199,7 +199,16 @@ void SceneText::Init()
 	MeshBuilder::GetInstance()->GetMesh("BlueHighlight")->textureID = LoadTGA("Image//BlueHighlight.tga");
 	MeshBuilder::GetInstance()->GenerateQuad("RedHighlight", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GetMesh("RedHighlight")->textureID = LoadTGA("Image//RedHighlight.tga");
-
+	
+	// Enemy states
+	MeshBuilder::GetInstance()->GenerateCube("EnemyPatrol", Color(1.0f, 0.64f, 0.0f), 1.0f);
+	MeshBuilder::GetInstance()->GetMesh("EnemyPatrol")->textureID = LoadTGA("Image//EnemyPatrol.tga");
+	MeshBuilder::GetInstance()->GenerateCube("EnemyChase", Color(1.0f, 0.64f, 0.0f), 1.0f);
+	MeshBuilder::GetInstance()->GetMesh("EnemyChase")->textureID = LoadTGA("Image//EnemyChase.tga");
+	MeshBuilder::GetInstance()->GenerateCube("EnemyAttack", Color(1.0f, 0.64f, 0.0f), 1.0f);
+	MeshBuilder::GetInstance()->GetMesh("EnemyAttack")->textureID = LoadTGA("Image//EnemyAttack.tga");
+	MeshBuilder::GetInstance()->GenerateCube("EnemyReturn", Color(1.0f, 0.64f, 0.0f), 1.0f);
+	MeshBuilder::GetInstance()->GetMesh("EnemyReturn")->textureID = LoadTGA("Image//EnemyReturn.tga");
 
 	// Set up the Spatial Partition and pass it to the EntityManager to manage
 	CSpatialPartition::GetInstance()->Init(100, 100, 10, 10);
@@ -272,6 +281,10 @@ void SceneText::Init()
 	//blueRobo1 = new CBlueRobo();
 	//blueRobo1->Init(40, -2.4, -65);
 	//BlueRoboSingleton::GetInstance()->BlueRobos.push_back(blueRobo1);
+
+	//blueRobo2 = new CBlueRobo();
+	//blueRobo2->Init(100, -2.4, -65);
+	//BlueRoboSingleton::GetInstance()->BlueRobos.push_back(blueRobo2);
 
 	//// Red Robo
 	//redRobo1 = new CRedRobo();

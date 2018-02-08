@@ -2,8 +2,10 @@
 #include "../GenericEntity.h"
 #include "../GroundEntity.h"
 #include "../Waypoint/Waypoint.h"
+#include "../PlayerInfo/PlayerInfo.h"
 
 #include <vector>
+
 using namespace std;
 
 class Mesh;
@@ -11,6 +13,14 @@ class Mesh;
 class CEnemy :
 	public GenericEntity
 {
+	enum ENEMY_STATES
+	{
+		E_PATROL = 0,
+		E_CHASE,
+		E_ATTACK,
+		E_RETURN
+	};
+
 protected:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
 	Vector3 target, up;
@@ -24,6 +34,10 @@ protected:
 
 	double m_dSpeed;
 	double m_dAcceleration;
+	
+	ENEMY_STATES _currState;
+	float directionVecX, directionVecZ, offset;
+	bool reached;
 
 public:
 	CEnemy(void);
@@ -62,4 +76,11 @@ public:
 	void Constrain(void);
 	// Render
 	void Render(void);
+
+	// enemy change state
+	void ChangeState(ENEMY_STATES state);
+	void PatrolState();
+	void ChaseState();
+	void AttackState();
+	void ReturnState();
 };

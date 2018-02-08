@@ -94,7 +94,7 @@ public:
 
 	// Handling Camera
 	void AttachCamera(FPSCamera* _cameraPtr);
-	void DetachCamera();
+	void DetachCamera(void);
 
 private:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
@@ -117,4 +117,10 @@ private:
 
 	CWeaponInfo* primaryWeapon;
 	CWeaponInfo* secondaryWeapon;
+
+	// Key to move the player
+	char keyMoveForward;
+	char keyMoveBackward;
+	char keyMoveLeft;
+	char keyMoveRight;
 };
