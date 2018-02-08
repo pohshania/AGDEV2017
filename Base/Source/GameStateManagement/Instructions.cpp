@@ -32,7 +32,7 @@ void CInstructions::Init()
 
 	// Load all the meshes
 	MeshBuilder::GetInstance()->GenerateQuad("INSTRUCTIONS_BKGROUND", Color(1, 1, 1), 1.f);
-	MeshBuilder::GetInstance()->GetMesh("INSTRUCTIONS_BKGROUND")->textureID = LoadTGA("Image//EnemyAttack.tga");
+	MeshBuilder::GetInstance()->GetMesh("INSTRUCTIONS_BKGROUND")->textureID = LoadTGA("Image//InstructionState.tga");
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
 	float halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
 	InstructionsStateBackground = Create::Sprite2DObject("INSTRUCTIONS_BKGROUND",
@@ -46,8 +46,8 @@ void CInstructions::Update(double dt)
 {
 	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
 	{
-		cout << "Loading CInstructions" << endl;
-		SceneManager::GetInstance()->SetActiveScene("GameState");
+		cout << "Loading MenuState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("MenuState");
 	}
 }
 

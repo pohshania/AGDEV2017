@@ -33,6 +33,10 @@ void CMenuState::Init()
 	// Load all the meshes
 	MeshBuilder::GetInstance()->GenerateQuad("MENUSTATE_BKGROUND", Color(1, 1, 1), 1.f);
 	MeshBuilder::GetInstance()->GetMesh("MENUSTATE_BKGROUND")->textureID = LoadTGA("Image//MenuState.tga");
+
+	MeshBuilder::GetInstance()->GenerateQuad("BlueHighlight", Color(1, 1, 1), 1.f);
+	MeshBuilder::GetInstance()->GetMesh("BlueHighlight")->textureID = LoadTGA("Image//BlueHighlight.tga");
+
 	float halfWindowWidth = Application::GetInstance().GetWindowWidth() / 2.0f;
 	float halfWindowHeight = Application::GetInstance().GetWindowHeight() / 2.0f;
 	MenuStateBackground = Create::Sprite2DObject("MENUSTATE_BKGROUND", 
@@ -44,9 +48,27 @@ void CMenuState::Init()
 
 void CMenuState::Update(double dt)
 {
-	if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
+	//if (KeyboardController::GetInstance()->IsKeyReleased(VK_SPACE))
+	//{
+	//	cout << "Loading CMenuState" << endl;
+	//	SceneManager::GetInstance()->SetActiveScene("InstructionsState");
+	//}
+
+	if (KeyboardController::GetInstance()->IsKeyReleased('1'))
 	{
-		cout << "Loading CMenuState" << endl;
+		cout << "Loading GameState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("GameState");
+	}
+
+	if (KeyboardController::GetInstance()->IsKeyReleased('2'))
+	{
+		cout << "Loading InstructionState" << endl;
+		SceneManager::GetInstance()->SetActiveScene("InstructionsState");
+	}
+
+	if (KeyboardController::GetInstance()->IsKeyReleased('3'))
+	{
+		cout << "Loading InstructionState" << endl;
 		SceneManager::GetInstance()->SetActiveScene("InstructionsState");
 	}
 }
@@ -60,8 +82,6 @@ void CMenuState::Render()
 	// Setup 3D pipeline then render 3D
 	GraphicsManager::GetInstance()->SetPerspectiveProjection(45.0f, 4.0f / 3.0f, 0.1f, 10000.0f);
 	GraphicsManager::GetInstance()->AttachCamera(&camera);
-
-	// Render the required entities
 	EntityManager::GetInstance()->Render();
 
 	// Setup 2D pipeline then render 2D
@@ -74,6 +94,7 @@ void CMenuState::Render()
 
 	// Render the required entities
 	EntityManager::GetInstance()->RenderUI();
+
 }
 
 void CMenuState::Exit()

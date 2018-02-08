@@ -437,12 +437,6 @@ void SceneText::Render()
 	GraphicsManager::GetInstance()->DetachCamera();
 	EntityManager::GetInstance()->RenderUI();
 
-	MS& modelStack = GraphicsManager::GetInstance()->GetModelStack();
-	modelStack.PushMatrix();
-	modelStack.Scale(10, 10, 10);
-	modelStack.Translate(0.5, -0.5, 0);
-	RenderHelper::RenderMesh(MeshBuilder::GetInstance()->GetMesh("EnemyAttack"));
-	modelStack.PopMatrix();
 }
 
 void SceneText::Exit()
