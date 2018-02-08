@@ -96,6 +96,11 @@ public:
 	void AttachCamera(FPSCamera* _cameraPtr);
 	void DetachCamera(void);
 
+	// Set score
+	void SetScore(int score);
+	// Get score
+	int GetScore();
+
 private:
 	Vector3 defaultPosition, defaultTarget, defaultUp;
 	Vector3 position, target, up;
@@ -123,4 +128,7 @@ private:
 	char keyMoveBackward;
 	char keyMoveLeft;
 	char keyMoveRight;
+
+	// score
+	int playerScore;
 };

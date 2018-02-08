@@ -198,6 +198,9 @@
     <ClCompile Include="Source\GameStateManagement\Instructions.cpp">
       <Filter>GameStateManagement</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameStateManagement\EndState.cpp">
+      <Filter>GameStateManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -351,6 +354,9 @@
       <Filter>Enemy\Enemy States</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameStateManagement\Instructions.h">
+      <Filter>GameStateManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameStateManagement\EndState.h">
       <Filter>GameStateManagement</Filter>
     </ClInclude>
   </ItemGroup>

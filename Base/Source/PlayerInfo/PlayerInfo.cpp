@@ -10,6 +10,8 @@
 #include "../WeaponInfo/GrenadeThrow.h"
 #include "../Lua/LuaInterface.h"
 
+using namespace std;
+
 // Allocating and initializing CPlayerInfo's static data member.  
 // The pointer is allocated but not the object's constructor.
 CPlayerInfo *CPlayerInfo::s_instance = 0;
@@ -52,6 +54,11 @@ CPlayerInfo::~CPlayerInfo(void)
 // Initialise this class instance
 void CPlayerInfo::Init(void)
 {
+	CLuaInterface::GetInstance()->Run();
+	playerScore = 0;
+	CLuaInterface::GetInstance()->saveIntValue("Player3", playerScore);
+	
+
 	// Set the default values
 	defaultPosition.Set(0,0,10);
 	defaultTarget.Set(0,0,0);
@@ -59,7 +66,7 @@ void CPlayerInfo::Init(void)
 
 	// Set the current values
 	position = CLuaInterface::GetInstance()->getVector3Values("CPlayerInfoStartPos");
-//	position.Set(0, 0, 10);
+    //position.Set(0, 0, 10);
 	target.Set(0, 0, 0);
 	up.Set(0, 1, 0);
 
@@ -292,6 +299,8 @@ void CPlayerInfo::UpdateFreeFall(double dt)
  ********************************************************************************/
 void CPlayerInfo::Update(double dt)
 {
+	//cout << playerScore;
+
 	double mouse_diff_x, mouse_diff_y;
 	MouseController::GetInstance()->GetMouseDelta(mouse_diff_x, mouse_diff_y);
 
@@ -514,4 +523,14 @@ void CPlayerInfo::AttachCamera(FPSCamera* _cameraPtr)
 void CPlayerInfo::DetachCamera()
 {
 	attachedCamera = nullptr;
+}
+
+void CPlayerInfo::SetScore(int score)
+{
+	this->playerScore = score;
+}
+
+int CPlayerInfo::GetScore()
+{
+	return playerScore;
 }

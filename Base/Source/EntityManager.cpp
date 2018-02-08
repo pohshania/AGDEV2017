@@ -3,6 +3,8 @@
 #include "Collider/Collider.h"
 #include "Projectile/Laser.h"
 #include "SceneGraph\SceneGraph.h"
+#include "PlayerInfo\PlayerInfo.h"
+#include "Lua\LuaInterface.h"
 
 #include <iostream>
 using namespace std;
@@ -397,10 +399,12 @@ bool EntityManager::CheckForCollision(void)
 				{
 					EntityBase *thatEntity = dynamic_cast<EntityBase*>(*colliderThat);
 					if (CheckSphereCollision(thisEntity, thatEntity))
-					{
+					{				
 						if (CheckAABBCollision(thisEntity, thatEntity))
-						{
+						{						
 							thisEntity->SetIsDone(true);
+							int totalScore = CPlayerInfo::GetInstance()->GetScore() + 25;
+							CPlayerInfo::GetInstance()->SetScore(totalScore);
 							thatEntity->SetIsDone(true);
 
 							// Remove from Scene Graph

@@ -138,8 +138,8 @@ void Application::Init()
 	m_window_height = CLuaInterface::GetInstance()->getIntValue("height");
 
 	CLuaInterface::GetInstance()->Run();
-	CLuaInterface::GetInstance()->saveFloatValue("Player1", 200.10, true);
-	CLuaInterface::GetInstance()->saveIntValue("Player2", 100);
+	//CLuaInterface::GetInstance()->saveFloatValue("Player1", 20099, true);
+	//CLuaInterface::GetInstance()->saveIntValue("Player2", 100);
 
 	//Set the error callback
 	glfwSetErrorCallback(error_callback);
@@ -199,6 +199,7 @@ void Application::Init()
 	SceneManager::GetInstance()->AddScene("MenuState", new CMenuState());
 	SceneManager::GetInstance()->AddScene("InstructionsState", new CInstructions());
 	SceneManager::GetInstance()->AddScene("GameState", new SceneText());
+	SceneManager::GetInstance()->AddScene("EndState", new CEndState());
 
 	// Set the active scene
 	SceneManager::GetInstance()->SetActiveScene("IntroState");

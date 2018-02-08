@@ -90,25 +90,25 @@ void CEnemy::ChangeState(ENEMY_STATES state)
 	{
 	case E_PATROL:
 	{
-		cout << "PATROLLING NOW!" << endl;
+		//cout << "PATROLLING NOW!" << endl;
 		PatrolState();
 		break;
 	}
 	case E_CHASE:
 	{
-		cout << "CHASING NOW!" << endl;
+		//cout << "CHASING NOW!" << endl;
 		ChaseState();
 		break;
 	}
 	case E_ATTACK:
 	{
-		cout << "ATTACKING NOW!" << endl;
+		//cout << "ATTACKING NOW!" << endl;
 		AttackState();
 		break;
 	}
 	case E_RETURN:
 	{
-		cout << "RETURN NOW!" << endl;
+		//cout << "RETURN NOW!" << endl;
 		ReturnState();
 		break;
 	}

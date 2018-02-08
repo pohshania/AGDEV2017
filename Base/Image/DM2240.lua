@@ -2,15 +2,17 @@ function SaveToLuaFile(outputString, overwrite)
    print("SaveToLuaFile...")
    local f;						-- The file
    if overwrite == 1 then		-- Wipe the contents with new data
-      f = assert(io.open("Image/DM2240_HighScore.lua", "w"))
+      f = assert(io.open("Image/DM2240_HighScore.lua", "r"))
    elseif overwrite == 0 then	-- Append with new data
       f = assert(io.open("Image/DM2240_HighScore.lua", "a"))
    end
    -- Write to the file
-   f:write(outputString)
+   f:write(outputString)   
    -- Close the file
    f:close()
-   print("OK")
+   print("OK NIMAMAMAMAMAMA")
+   print(outputString)
+
 end
 
 function CalculateDistanceSquare(x1,y1,z1,x2,y2,z2)
@@ -44,6 +46,7 @@ function GetMinMax(...)
 	print(minValue, maxValue, avgValue, numValues)
 	return minValue, maxValue, avgValue, numValues
 end
+
 
 title = "DM2240 - Week 14 Scripting"
 width = 800
